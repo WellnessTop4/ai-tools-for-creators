@@ -14,13 +14,9 @@ body {
 header {
   text-align: center;
   margin-bottom: 40px;
-  background: linear-gradient(135deg, #1f1f1f 0%, #2c2c2c 100%);
-  padding: 40px 20px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
-h1 { color: #bb86fc; margin-bottom: 5px; font-size: 36px; }
-.subtitle { color: #aaa; font-size: 16px; }
+h1 { color: #bb86fc; margin-bottom: 5px; }
+.subtitle { color: #aaa; font-size: 14px; }
 .container {
   max-width: 1000px;
   margin: auto;
@@ -39,7 +35,7 @@ h1 { color: #bb86fc; margin-bottom: 5px; font-size: 36px; }
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
-h2 { margin-top:0; color:#bb86fc; font-size:20px; }
+h2 { margin-top:0; color:#bb86fc; font-size:18px; }
 input, textarea {
   width:100%;
   padding:10px;
@@ -51,10 +47,10 @@ input, textarea {
   color:#f0f0f0;
   box-sizing:border-box;
 }
-textarea{ min-height:100px; }
+textarea{ min-height:90px; }
 button {
   width:100%;
-  padding:12px;
+  padding:10px;
   margin-top:10px;
   background:#bb86fc;
   color:#121212;
@@ -62,7 +58,6 @@ button {
   border-radius:6px;
   font-size:14px;
   cursor:pointer;
-  transition: 0.2s;
 }
 button:hover{ background:#985eff; }
 .output {
@@ -88,7 +83,7 @@ footer {
 
 <header>
 <h1>AI Tools for Creators</h1>
-<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap med flow</div>
+<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap</div>
 </header>
 
 <div class="container">
@@ -134,7 +129,7 @@ footer {
 
 <!-- Rap Generator -->
 <div class="tool-card">
-<h2>AI Rap Generator</h2>
+<h2>AI Rap Song Generator</h2>
 <textarea id="rapInput" placeholder="Skriv idé, tekst eller historie…"></textarea>
 <button onclick="generateRapSong()">Generate Rap</button>
 <div class="output" id="rapSongOutput"></div>
@@ -145,7 +140,7 @@ footer {
 <footer>Free AI tools for content creators</footer>
 
 <script>
-/* --- Hashtag Generator --- */
+/* HASHTAGS */
 const hashtagDb={
   fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
   travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
@@ -158,7 +153,7 @@ function generateHashtags(){
   document.getElementById("hashtagOutput").innerText=list.join(" ");
 }
 
-/* --- Clickbait Title Generator --- */
+/* CLICKBAIT */
 const titles=[
   "Du vil ikke tro hvad der skete med {topic}",
   "5 hemmeligheder om {topic} som ingen fortæller",
@@ -172,7 +167,7 @@ function generateTitle(){
   document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
 }
 
-/* --- Emoji Enhancer --- */
+/* EMOJIS */
 const emojiMap={ love:"❤️", coffee:"☕", travel:"🌍", happy:"😊", food:"🍔", star:"⭐" };
 function addEmojis(){
   let txt=document.getElementById("emojiText").value;
@@ -183,7 +178,7 @@ function addEmojis(){
   document.getElementById("emojiOutput").innerText=txt;
 }
 
-/* --- Word Counter --- */
+/* WORD COUNTER */
 function countWords(){
   const txt=document.getElementById("wordText").value.trim();
   const words=txt?txt.split(/\s+/).length:0;
@@ -191,7 +186,7 @@ function countWords(){
   document.getElementById("wordOutput").innerText="Words: "+words+"\nCharacters: "+chars;
 }
 
-/* --- Prompt Generator --- */
+/* PROMPT GENERATOR */
 const subjects=["AI","Fitness","Marketing","Travel","Food"];
 const actions=["ideas","tips","strategies","guides"];
 const formats=["for TikTok","for Instagram","for YouTube","for blogs"];
@@ -202,16 +197,16 @@ function generatePrompt(){
   document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
 }
 
-/* --- Human-style Rap Generator --- */
-const rhymeWords=["flow","show","go","know","blow","grow","low","yo","pro","ho"];
+/* RAP GENERATOR */
 function generateRapSong(){
-  const input=document.getElementById("rapInput").value.trim();
-  if(!input){ document.getElementById("rapSongOutput").innerText="Skriv tekst først."; return; }
-  const lines=input.split(/\n|\.|,/).filter(l=>l.trim()!="");
+  const text=document.getElementById("rapInput").value.trim();
+  if(!text){ document.getElementById("rapSongOutput").innerText="Skriv tekst først."; return; }
+  const lines=text.split(/\n|\.|,/).filter(l=>l.trim()!="");
   let rap="";
-  lines.forEach((line)=>{
-    const rhyme=rhymeWords[Math.floor(Math.random()*rhymeWords.length)];
-    rap+="🎤 "+line+" "+rhyme+"\n";
+  const beats=["🎤","🎵","🔥","💥"];
+  lines.forEach((l,i)=>{
+    const beat = beats[i % beats.length];
+    rap+=beat+" "+l+"\n";
   });
   document.getElementById("rapSongOutput").innerText=rap;
 }
