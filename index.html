@@ -25,7 +25,7 @@ h1 { color: #bb86fc; margin-bottom: 5px; }
   gap: 20px;
 }
 .tool-card {
-  background: #1e1e1e;
+  background: #1f1f1f;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.6);
@@ -40,10 +40,10 @@ input, textarea {
   width:100%;
   padding:10px;
   margin-top:8px;
-  border:1px solid #333;
+  border:1px solid #444;
   border-radius:6px;
   font-size:14px;
-  background:#2c2c2c;
+  background:#333;
   color:#f0f0f0;
   box-sizing:border-box;
 }
@@ -202,10 +202,9 @@ function generateRapSong(){
   const text=document.getElementById("rapInput").value.trim();
   if(!text){ document.getElementById("rapSongOutput").innerText="Skriv tekst først."; return; }
   const lines=text.split(/\n|\.|,/).filter(l=>l.trim()!="");
-  const beats=["Boom bap, trap beat, 808 kicks"];
   let rap="";
   lines.forEach((l,i)=>{
-    rap+=beats[0]+" | "+l+"\n";
+    rap+="🎵 "+l+"\n";
   });
   document.getElementById("rapSongOutput").innerText=rap;
 }
