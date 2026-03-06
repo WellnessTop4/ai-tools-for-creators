@@ -1,185 +1,204 @@
 <!DOCTYPE html>
-<html>
+<html lang="da">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Tools for Creators</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      padding: 20px;
-      background: #f0f4f8;
-      color: #333;
-    }
-
-    h1 {
-      color: #0d47a1;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .tool-card {
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      max-width: 500px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .tool-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    h2 {
-      margin-top: 0;
-    }
-
-    input, textarea {
-      font-size: 16px;
-      margin: 5px 0;
-      padding: 8px;
-      width: 100%;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    button {
-      background: #0d47a1;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 10px;
-      margin-top: 10px;
-      width: 100%;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      background: #1565c0;
-      transform: scale(1.03);
-    }
-
-    .output {
-      background: #f9f9f9;
-      padding: 15px;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-      white-space: pre-wrap;
-      border-radius: 5px;
-    }
-
-    /* Farver per kort */
-    #hashtagCard { background: #e1bee7; }      /* lilla */
-    #clickbaitCard { background: #ffe0b2; }    /* orange */
-    #emojiCard { background: #fff9c4; }        /* gul */
-    #wordCard { background: #c8e6c9; }         /* grøn */
-    #promptCard { background: #b3e5fc; }       /* blå */
-  </style>
+<meta charset="UTF-8">
+<title>AI Tools for Creators</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  margin: 0;
+  padding: 40px 20px;
+  color: #333;
+}
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+h1 {
+  color: #0d47a1;
+  margin-bottom: 5px;
+}
+.subtitle {
+  color: #666;
+  font-size: 14px;
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.tool-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+h2 {
+  margin-top: 0;
+  color: #1565c0;
+  font-size: 18px;
+}
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+textarea {
+  min-height: 90px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #0d47a1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover {
+  background: #1565c0;
+}
+.output {
+  margin-top: 12px;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  font-size: 14px;
+}
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 13px;
+  color: #777;
+}
+@media(max-width:700px){
+  .container{ grid-template-columns:1fr; }
+}
+</style>
 </head>
 <body>
 
+<header>
 <h1>AI Tools for Creators</h1>
+<p class="subtitle">Free tools for hashtags, titles, prompts, emojis & more</p>
+</header>
 
-<!-- 1. Hashtag Generator -->
-<div class="tool-card" id="hashtagCard">
-  <h2>#️⃣ Hashtag Generator</h2>
-  <input id="topic" placeholder="Skriv emne fx 'fitness'">
-  <button onclick="generateHashtags()">Generate Hashtags</button>
-  <div class="output" id="hashtagOutput"></div>
+<div class="container">
+
+<div class="tool-card">
+<h2>Hashtag Generator</h2>
+<input id="topic" placeholder="Skriv emne fx 'fitness travel'">
+<button onclick="generateHashtags()">Generate Hashtags</button>
+<div class="output" id="hashtagOutput"></div>
 </div>
 
-<!-- 2. Clickbait Title Generator -->
-<div class="tool-card" id="clickbaitCard">
-  <h2>📝 Clickbait Title Generator</h2>
-  <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
-  <button onclick="generateTitle()">Generate Title</button>
-  <div class="output" id="titleOutput"></div>
+<div class="tool-card">
+<h2>Clickbait Title Generator</h2>
+<input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
+<button onclick="generateTitle()">Generate Title</button>
+<div class="output" id="titleOutput"></div>
 </div>
 
-<!-- 3. Emoji Enhancer -->
-<div class="tool-card" id="emojiCard">
-  <h2>😄 Emoji Enhancer</h2>
-  <textarea id="emojiText" placeholder="Skriv sætning…"></textarea>
-  <button onclick="addEmojis()">Add Emojis</button>
-  <div class="output" id="emojiOutput"></div>
+<div class="tool-card">
+<h2>Emoji Enhancer</h2>
+<textarea id="emojiText" placeholder="Skriv tekst..."></textarea>
+<button onclick="addEmojis()">Add Emojis</button>
+<div class="output" id="emojiOutput"></div>
 </div>
 
-<!-- 4. Word Counter -->
-<div class="tool-card" id="wordCard">
-  <h2>📊 Word Counter & Readability</h2>
-  <textarea id="wordText" placeholder="Skriv din tekst…"></textarea>
-  <button onclick="countWords()">Count Words</button>
-  <div class="output" id="wordOutput"></div>
+<div class="tool-card">
+<h2>Word Counter & Readability</h2>
+<textarea id="wordText" placeholder="Skriv din tekst..."></textarea>
+<button onclick="countWords()">Count Words</button>
+<div class="output" id="wordOutput"></div>
 </div>
 
-<!-- 5. Prompt Mix Generator -->
-<div class="tool-card" id="promptCard">
-  <h2>💡 Prompt Mix Generator</h2>
-  <button onclick="generatePrompt()">Generate Random Prompt</button>
-  <div class="output" id="promptOutput"></div>
+<div class="tool-card">
+<h2>Prompt Generator</h2>
+<button onclick="generatePrompt()">Generate Prompt</button>
+<div class="output" id="promptOutput"></div>
 </div>
+
+</div>
+
+<footer>
+Free AI tools for content creators | <a href="https://wellnesstop4.github.io/ai-tools-for-creators/" target="_blank">Visit Site</a>
+</footer>
 
 <script>
-/* --- Hashtag Generator --- */
-const hashtagDb = {
-  fitness:["#FitnessLife","#Workout","#HealthGoals","#GymTime","#NoPainNoGain"],
-  travel:["#TravelLife","#Wanderlust","#Adventure","#Explore","#VacationMode"],
-  food:["#Foodie","#Yummy","#Delicious","#FoodLover","#InstaFood"],
-  fashion:["#OOTD","#Style","#Fashionista","#Trendy","#LookBook"],
-  tech:["#Tech","#Innovation","#Gadgets","#AI","#Future"]
+const hashtagDb={
+  fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
+  travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
+  food:["#Food","#Foodie","#Delicious","#InstaFood","#Yummy"],
+  tech:["#Tech","#AI","#Innovation","#Future","#Startup"],
+  fashion:["#OOTD","#Style","#Fashionista","#Trendy","#LookBook"]
 };
 function generateHashtags() {
-  const topic=document.getElementById("topic").value.toLowerCase();
-  const list=hashtagDb[topic] || ["#Inspiration","#Fun","#Life","#Motivation","#Creative"];
-  document.getElementById("hashtagOutput").innerText=list.join(" ");
+  const input = document.getElementById("topic").value.toLowerCase();
+  const words = input.split(/\s+/);
+  let hashtags = [];
+  words.forEach(word=>{
+    if(hashtagDb[word]) hashtags = hashtags.concat(hashtagDb[word]);
+  });
+  if(hashtags.length===0) hashtags = ["#Content","#Creator","#Trending","#Viral","#Ideas"];
+  hashtags = [...new Set(hashtags)];
+  document.getElementById("hashtagOutput").innerText = hashtags.join(" ");
 }
 
-/* --- Clickbait Title Generator --- */
-const templates=[
-  "Du vil ikke tro hvad der skete da {topic}…",
-  "5 ting alle bør vide om {topic}",
-  "Sådan mestrer du {topic} på 7 dage",
-  "Hemmelige tricks til {topic} som eksperter ikke vil fortælle dig",
-  "Alt du skal vide om {topic} inden du starter"
+const titles=[
+"You won't believe what happened with {topic}",
+"5 secrets about {topic} nobody tells you",
+"How {topic} changed everything",
+"The truth about {topic}",
+"Top tricks creators use for {topic}"
 ];
-function generateTitle() {
-  const topic=document.getElementById("clickbaitTopic").value || "emnet";
-  const template=templates[Math.floor(Math.random()*templates.length)];
+function generateTitle(){
+  const topic=document.getElementById("clickbaitTopic").value||"this";
+  const template=titles[Math.floor(Math.random()*titles.length)];
   document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
 }
 
-/* --- Emoji Enhancer --- */
-const emojiMap={love:"❤️",happy:"😊",coffee:"☕",travel:"🌍",fun:"🎉",food:"🍔",star:"⭐"};
-function addEmojis() {
+const emojiMap={love:"❤️",coffee:"☕",travel:"🌍",happy:"😊",food:"🍔",star:"⭐"};
+function addEmojis(){
   let txt=document.getElementById("emojiText").value;
   for(const word in emojiMap){
     const re=new RegExp("\\b"+word+"\\b","gi");
-    txt=txt.replace(re,emojiMap[word]+" $&");
+    txt=txt.replace(re,emojiMap[word]+" "+word);
   }
   document.getElementById("emojiOutput").innerText=txt;
 }
 
-/* --- Word Counter --- */
-function countWords() {
+function countWords(){
   const txt=document.getElementById("wordText").value.trim();
   const words=txt?txt.split(/\s+/).length:0;
   const chars=txt.length;
-  document.getElementById("wordOutput").innerText=`Words: ${words}\nCharacters: ${chars}`;
+  document.getElementById("wordOutput").innerText="Words: "+words+"\nCharacters: "+chars;
 }
 
-/* --- Prompt Mix Generator --- */
-const subjects=["AI","Marketing","Travel","Food","Fashion","Fitness"];
-const actions=["tips","ideas","guides","tricks","facts"];
-const formats=["for Instagram","for TikTok","for Blogs","for YouTube","for Twitter"];
-function generatePrompt() {
-  const subject=subjects[Math.floor(Math.random()*subjects.length)];
-  const action=actions[Math.floor(Math.random()*actions.length)];
-  const format=formats[Math.floor(Math.random()*formats.length)];
-  document.getElementById("promptOutput").innerText=`Create ${action} about ${subject} ${format}`;
+const subjects=["AI","Fitness","Marketing","Travel","Food","Fashion"];
+const actions=["ideas","tips","strategies","guides"];
+const formats=["for TikTok","for Instagram","for YouTube","for blogs"];
+function generatePrompt(){
+  const s=subjects[Math.floor(Math.random()*subjects.length)];
+  const a=actions[Math.floor(Math.random()*actions.length)];
+  const f=formats[Math.floor(Math.random()*formats.length)];
+  document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
 }
 </script>
 
