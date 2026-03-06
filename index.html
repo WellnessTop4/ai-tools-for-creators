@@ -6,85 +6,34 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: url('https://source.unsplash.com/1600x900/?technology,dark') no-repeat center center fixed;
-  background-size: cover;
+  background: #121212;
   margin: 0;
   padding: 40px 20px;
   color: #f0f0f0;
+  background-image: url('https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
-header {
-  text-align: center;
-  margin-bottom: 40px;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
-}
-h1 { color: #bb86fc; margin-bottom: 5px; }
-.subtitle { color: #aaa; font-size: 14px; }
-.lang-select {
-  margin-top: 10px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background:#333; color:#f0f0f0;
-}
-.container {
-  max-width: 1000px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+header { text-align:center; margin-bottom:40px; }
+h1 { color:#bb86fc; margin-bottom:5px; }
+.subtitle { color:#aaa; font-size:14px; }
+.container { max-width:1000px; margin:auto; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .tool-card {
-  background: rgba(31,31,31,0.95);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
-  transition: 0.2s;
+  background: rgba(31,31,31,0.9);
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.6);
+  transition:0.2s;
 }
-.tool-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
-}
+.tool-card:hover { transform: translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.8); }
 h2 { margin-top:0; color:#bb86fc; font-size:18px; }
-input, textarea, select {
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-  border:1px solid #444;
-  border-radius:6px;
-  font-size:14px;
-  background:#333;
-  color:#f0f0f0;
-  box-sizing:border-box;
-}
+input, textarea { width:100%; padding:10px; margin-top:8px; border:1px solid #444; border-radius:6px; font-size:14px; background:#333; color:#f0f0f0; box-sizing:border-box; }
 textarea{ min-height:90px; }
-button {
-  width:100%;
-  padding:10px;
-  margin-top:10px;
-  background:#bb86fc;
-  color:#121212;
-  border:none;
-  border-radius:6px;
-  font-size:14px;
-  cursor:pointer;
-}
+button { width:100%; padding:10px; margin-top:10px; background:#bb86fc; color:#121212; border:none; border-radius:6px; font-size:14px; cursor:pointer; }
 button:hover{ background:#985eff; }
-.output {
-  margin-top:12px;
-  background:#2c2c2c;
-  border:1px solid #444;
-  padding:12px;
-  border-radius:6px;
-  white-space:pre-wrap;
-  font-size:14px;
-  color:#f0f0f0;
-}
-footer {
-  text-align:center;
-  margin-top:40px;
-  font-size:13px;
-  color:#aaa;
-}
+.output { margin-top:12px; background:#2c2c2c; border:1px solid #444; padding:12px; border-radius:6px; white-space:pre-wrap; font-size:14px; color:#f0f0f0; }
+footer { text-align:center; margin-top:40px; font-size:13px; color:#aaa; }
 @media(max-width:700px){ .container{ grid-template-columns:1fr; } }
 </style>
 </head>
@@ -92,30 +41,22 @@ footer {
 
 <header>
 <h1>AI Tools for Creators</h1>
-<div class="subtitle" id="headerSubtitle">Gratis værktøjer til captions, hashtags, prompts og bio</div>
-<select class="lang-select" id="langSelect" onchange="changeLang()">
-  <option value="da">Dansk</option>
-  <option value="en">English</option>
-  <option value="ar">العربية</option>
-  <option value="fr">Français</option>
-  <option value="de">Deutsch</option>
-  <option value="es">Español</option>
-</select>
+<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og bio</div>
 </header>
 
 <div class="container">
 
 <!-- Hashtag Generator -->
 <div class="tool-card">
-<h2 id="hashtagTitle">Hashtag Generator</h2>
-<input id="topic" placeholder="Skriv emne fx 'fitness'">
+<h2>Hashtag Generator</h2>
+<input id="topic" placeholder="Skriv emne fx 'fitness' eller 'fugl'">
 <button onclick="generateHashtags()">Generate Hashtags</button>
 <div class="output" id="hashtagOutput"></div>
 </div>
 
 <!-- Clickbait Title Generator -->
 <div class="tool-card">
-<h2 id="clickbaitTitle">Clickbait Title Generator</h2>
+<h2>Clickbait Title Generator</h2>
 <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
 <button onclick="generateTitle()">Generate Title</button>
 <div class="output" id="titleOutput"></div>
@@ -123,7 +64,7 @@ footer {
 
 <!-- Emoji Enhancer -->
 <div class="tool-card">
-<h2 id="emojiTitle">Emoji Enhancer</h2>
+<h2>Emoji Enhancer</h2>
 <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
 <button onclick="addEmojis()">Add Emojis</button>
 <div class="output" id="emojiOutput"></div>
@@ -131,7 +72,7 @@ footer {
 
 <!-- Word Counter -->
 <div class="tool-card">
-<h2 id="wordTitle">Word Counter</h2>
+<h2>Word Counter</h2>
 <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
 <button onclick="countWords()">Count Words</button>
 <div class="output" id="wordOutput"></div>
@@ -139,61 +80,51 @@ footer {
 
 <!-- Prompt Generator -->
 <div class="tool-card">
-<h2 id="promptTitle">Prompt Generator</h2>
+<h2>Prompt Generator</h2>
 <button onclick="generatePrompt()">Generate Prompt</button>
 <div class="output" id="promptOutput"></div>
 </div>
 
 <!-- Bio Generator -->
 <div class="tool-card">
-<h2 id="bioTitle">AI Bio Generator</h2>
-<textarea id="bioInput" placeholder="Skriv ide eller beskrivelse…"></textarea>
+<h2>Bio Generator</h2>
+<input id="bioName" placeholder="Skriv navn eller niche">
 <button onclick="generateBio()">Generate Bio</button>
 <div class="output" id="bioOutput"></div>
 </div>
 
 </div>
 
-<footer id="footerText">Free AI tools for content creators</footer>
+<footer>Free AI tools for content creators</footer>
 
 <script>
-// --- LANGUAGES ---
-const translations = {
-  da:{ header:"Gratis værktøjer til captions, hashtags, prompts og bio", hashtag:"Hashtag Generator", clickbait:"Clickbait Title Generator", emoji:"Emoji Enhancer", word:"Word Counter", prompt:"Prompt Generator", bio:"AI Bio Generator", footer:"Gratis AI værktøjer for creators" },
-  en:{ header:"Free tools for captions, hashtags, prompts and bio", hashtag:"Hashtag Generator", clickbait:"Clickbait Title Generator", emoji:"Emoji Enhancer", word:"Word Counter", prompt:"Prompt Generator", bio:"AI Bio Generator", footer:"Free AI tools for content creators" },
-  ar:{ header:"أدوات مجانية للكتابات والهاشتاجات والبروامبت والسيرة الذاتية", hashtag:"مولد هاشتاج", clickbait:"مولد عناوين مثيرة", emoji:"محسن الرموز التعبيرية", word:"عداد الكلمات", prompt:"مولد العبارات", bio:"مولد السيرة الذاتية", footer:"أدوات AI مجانية للمنشئين" },
-  fr:{ header:"Outils gratuits pour légendes, hashtags, prompts et bio", hashtag:"Générateur de hashtags", clickbait:"Générateur de titres accrocheurs", emoji:"Améliorateur d'emojis", word:"Compteur de mots", prompt:"Générateur de prompts", bio:"Générateur de bio", footer:"Outils AI gratuits pour créateurs" },
-  de:{ header:"Kostenlose Tools für Captions, Hashtags, Prompts und Bio", hashtag:"Hashtag Generator", clickbait:"Clickbait-Titel Generator", emoji:"Emoji Enhancer", word:"Wortzähler", prompt:"Prompt Generator", bio:"AI Bio Generator", footer:"Kostenlose AI-Tools für Creator" },
-  es:{ header:"Herramientas gratuitas para captions, hashtags, prompts y bio", hashtag:"Generador de Hashtags", clickbait:"Generador de Títulos Clickbait", emoji:"Mejorador de Emojis", word:"Contador de Palabras", prompt:"Generador de Prompts", bio:"Generador de Bio", footer:"Herramientas AI gratuitas para creadores" }
-};
-function changeLang(){
-  const lang = document.getElementById("langSelect").value;
-  const t = translations[lang];
-  document.getElementById("headerSubtitle").innerText = t.header;
-  document.getElementById("hashtagTitle").innerText = t.hashtag;
-  document.getElementById("clickbaitTitle").innerText = t.clickbait;
-  document.getElementById("emojiTitle").innerText = t.emoji;
-  document.getElementById("wordTitle").innerText = t.word;
-  document.getElementById("promptTitle").innerText = t.prompt;
-  document.getElementById("bioTitle").innerText = t.bio;
-  document.getElementById("footerText").innerText = t.footer;
-}
-
-// --- HASHTAGS ---
-const hashtagDb = {
+/* HASHTAGS */
+const hashtagDb={
   fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
   travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
   food:["#Food","#Foodie","#Delicious","#InstaFood","#Yummy"],
-  tech:["#Tech","#AI","#Innovation","#Future","#Startup"]
+  tech:["#Tech","#AI","#Innovation","#Future","#Startup"],
+  fugl:["#Bird","#Nature","#Birdwatching","#Feathers","#Flying"],
+  mand:["#Man","#Style","#MensFashion","#MensHealth","#Gentleman"],
+  hund:["#Dog","#Puppy","#DogLover","#PetLife","#Dogstagram"]
 };
 function generateHashtags(){
-  const topic = document.getElementById("topic").value.toLowerCase();
-  const list = hashtagDb[topic] || ["#Content","#Creator","#Trending","#Viral","#Ideas"];
-  document.getElementById("hashtagOutput").innerText=list.join(" ");
+  const input=document.getElementById("topic").value.toLowerCase();
+  let hashtags=[];
+  const words=input.split(/\s+/);
+  for(const word of words){
+    if(hashtagDb[word]){
+      hashtags=hashtags.concat(hashtagDb[word]);
+    }
+  }
+  if(hashtags.length===0){
+    hashtags=["#Content","#Creator","#Trending","#Viral","#Ideas"];
+  }
+  document.getElementById("hashtagOutput").innerText=hashtags.join(" ");
 }
 
-// --- CLICKBAIT ---
-const titles = [
+/* CLICKBAIT */
+const titles=[
   "Du vil ikke tro hvad der skete med {topic}",
   "5 hemmeligheder om {topic} som ingen fortæller",
   "Hvordan {topic} ændrede alt",
@@ -206,7 +137,7 @@ function generateTitle(){
   document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
 }
 
-// --- EMOJIS ---
+/* EMOJIS */
 const emojiMap={ love:"❤️", coffee:"☕", travel:"🌍", happy:"😊", food:"🍔", star:"⭐" };
 function addEmojis(){
   let txt=document.getElementById("emojiText").value;
@@ -217,7 +148,7 @@ function addEmojis(){
   document.getElementById("emojiOutput").innerText=txt;
 }
 
-// --- WORD COUNTER ---
+/* WORD COUNTER */
 function countWords(){
   const txt=document.getElementById("wordText").value.trim();
   const words=txt?txt.split(/\s+/).length:0;
@@ -225,7 +156,7 @@ function countWords(){
   document.getElementById("wordOutput").innerText="Words: "+words+"\nCharacters: "+chars;
 }
 
-// --- PROMPT GENERATOR ---
+/* PROMPT GENERATOR */
 const subjects=["AI","Fitness","Marketing","Travel","Food"];
 const actions=["ideas","tips","strategies","guides"];
 const formats=["for TikTok","for Instagram","for YouTube","for blogs"];
@@ -236,14 +167,18 @@ function generatePrompt(){
   document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
 }
 
-// --- BIO GENERATOR ---
+/* BIO GENERATOR */
 function generateBio(){
-  const text=document.getElementById("bioInput").value.trim();
-  if(!text){ document.getElementById("bioOutput").innerText="Skriv ide først."; return; }
-  const lines=text.split(/\n|\.|,/).filter(l=>l.trim()!="");
-  let bio="";
-  lines.forEach((l,i)=>{ bio += "• "+l+"\n"; });
-  document.getElementById("bioOutput").innerText=bio;
+  const name=document.getElementById("bioName").value.trim();
+  if(!name){ document.getElementById("bioOutput").innerText="Skriv navn eller niche først."; return; }
+  const templates=[
+    `Creative mind in ${name}`,
+    `Sharing best ${name} tips daily`,
+    `Passionate about ${name} and innovation`,
+    `${name} enthusiast and content creator`,
+    `Making ${name} fun and engaging`
+  ];
+  document.getElementById("bioOutput").innerText=templates[Math.floor(Math.random()*templates.length)];
 }
 </script>
 
