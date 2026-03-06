@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="da">
-<head>
-<meta charset="UTF-8">
-<title>AI Tools for Creators</title>
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: #f4f6fb;
+  background: #121212; /* mørk baggrund */
   margin: 0;
   padding: 40px 20px;
-  color: #333;
+  color: #f0f0f0; /* lys tekst */
 }
 header {
   text-align: center;
   margin-bottom: 40px;
 }
 h1 {
-  color: #0d47a1;
+  color: #bb86fc; /* lidt farve til header */
   margin-bottom: 5px;
 }
 .subtitle {
-  color: #666;
+  color: #aaa;
   font-size: 14px;
 }
 .container {
@@ -31,176 +26,63 @@ h1 {
   gap: 20px;
 }
 .tool-card {
-  background: white;
+  background: #1e1e1e; /* mørk kort baggrund */
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
   transition: 0.2s;
 }
 .tool-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
 h2 {
   margin-top: 0;
-  color: #1565c0;
+  color: #bb86fc;
   font-size: 18px;
 }
 input, textarea {
   width: 100%;
   padding: 10px;
   margin-top: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
   border-radius: 6px;
   font-size: 14px;
+  background: #2c2c2c;
+  color: #f0f0f0;
   box-sizing: border-box;
-}
-textarea {
-  min-height: 90px;
 }
 button {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background: #0d47a1;
-  color: white;
+  background: #bb86fc;
+  color: #121212;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
 }
 button:hover {
-  background: #1565c0;
+  background: #985eff;
 }
 .output {
   margin-top: 12px;
-  background: #f7f7f7;
-  border: 1px solid #ddd;
+  background: #2c2c2c;
+  border: 1px solid #444;
   padding: 12px;
   border-radius: 6px;
   white-space: pre-wrap;
   font-size: 14px;
+  color: #f0f0f0;
 }
 footer {
   text-align: center;
   margin-top: 40px;
   font-size: 13px;
-  color: #777;
+  color: #aaa;
 }
 @media(max-width:700px){
   .container{ grid-template-columns:1fr; }
 }
 </style>
-</head>
-<body>
-
-<header>
-<h1>AI Tools for Creators</h1>
-<p class="subtitle">Free tools for hashtags, titles, prompts, emojis & more</p>
-</header>
-
-<div class="container">
-
-<div class="tool-card">
-<h2>Hashtag Generator</h2>
-<input id="topic" placeholder="Skriv emne fx 'fitness travel'">
-<button onclick="generateHashtags()">Generate Hashtags</button>
-<div class="output" id="hashtagOutput"></div>
-</div>
-
-<div class="tool-card">
-<h2>Clickbait Title Generator</h2>
-<input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
-<button onclick="generateTitle()">Generate Title</button>
-<div class="output" id="titleOutput"></div>
-</div>
-
-<div class="tool-card">
-<h2>Emoji Enhancer</h2>
-<textarea id="emojiText" placeholder="Skriv tekst..."></textarea>
-<button onclick="addEmojis()">Add Emojis</button>
-<div class="output" id="emojiOutput"></div>
-</div>
-
-<div class="tool-card">
-<h2>Word Counter & Readability</h2>
-<textarea id="wordText" placeholder="Skriv din tekst..."></textarea>
-<button onclick="countWords()">Count Words</button>
-<div class="output" id="wordOutput"></div>
-</div>
-
-<div class="tool-card">
-<h2>Prompt Generator</h2>
-<button onclick="generatePrompt()">Generate Prompt</button>
-<div class="output" id="promptOutput"></div>
-</div>
-
-</div>
-
-<footer>
-Free AI tools for content creators | <a href="https://wellnesstop4.github.io/ai-tools-for-creators/" target="_blank">Visit Site</a>
-</footer>
-
-<script>
-const hashtagDb={
-  fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
-  travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
-  food:["#Food","#Foodie","#Delicious","#InstaFood","#Yummy"],
-  tech:["#Tech","#AI","#Innovation","#Future","#Startup"],
-  fashion:["#OOTD","#Style","#Fashionista","#Trendy","#LookBook"]
-};
-function generateHashtags() {
-  const input = document.getElementById("topic").value.toLowerCase();
-  const words = input.split(/\s+/);
-  let hashtags = [];
-  words.forEach(word=>{
-    if(hashtagDb[word]) hashtags = hashtags.concat(hashtagDb[word]);
-  });
-  if(hashtags.length===0) hashtags = ["#Content","#Creator","#Trending","#Viral","#Ideas"];
-  hashtags = [...new Set(hashtags)];
-  document.getElementById("hashtagOutput").innerText = hashtags.join(" ");
-}
-
-const titles=[
-"You won't believe what happened with {topic}",
-"5 secrets about {topic} nobody tells you",
-"How {topic} changed everything",
-"The truth about {topic}",
-"Top tricks creators use for {topic}"
-];
-function generateTitle(){
-  const topic=document.getElementById("clickbaitTopic").value||"this";
-  const template=titles[Math.floor(Math.random()*titles.length)];
-  document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
-}
-
-const emojiMap={love:"❤️",coffee:"☕",travel:"🌍",happy:"😊",food:"🍔",star:"⭐"};
-function addEmojis(){
-  let txt=document.getElementById("emojiText").value;
-  for(const word in emojiMap){
-    const re=new RegExp("\\b"+word+"\\b","gi");
-    txt=txt.replace(re,emojiMap[word]+" "+word);
-  }
-  document.getElementById("emojiOutput").innerText=txt;
-}
-
-function countWords(){
-  const txt=document.getElementById("wordText").value.trim();
-  const words=txt?txt.split(/\s+/).length:0;
-  const chars=txt.length;
-  document.getElementById("wordOutput").innerText="Words: "+words+"\nCharacters: "+chars;
-}
-
-const subjects=["AI","Fitness","Marketing","Travel","Food","Fashion"];
-const actions=["ideas","tips","strategies","guides"];
-const formats=["for TikTok","for Instagram","for YouTube","for blogs"];
-function generatePrompt(){
-  const s=subjects[Math.floor(Math.random()*subjects.length)];
-  const a=actions[Math.floor(Math.random()*actions.length)];
-  const f=formats[Math.floor(Math.random()*formats.length)];
-  document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
-}
-</script>
-
-</body>
-</html>
