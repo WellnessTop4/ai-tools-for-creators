@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AI Tools for Creators</title>
 
 <style>
@@ -121,8 +124,6 @@ grid-template-columns:1fr;
 
 <div class="container">
 
-<!-- Hashtag Generator -->
-
 <div class="tool-card">
 <h2># Hashtag Generator</h2>
 
@@ -131,10 +132,8 @@ grid-template-columns:1fr;
 <button onclick="generateHashtags()">Generate Hashtags</button>
 
 <div class="output" id="hashtagOutput"></div>
-
 </div>
 
-<!-- Clickbait Title -->
 
 <div class="tool-card">
 <h2>Clickbait Title Generator</h2>
@@ -144,10 +143,8 @@ grid-template-columns:1fr;
 <button onclick="generateTitle()">Generate Title</button>
 
 <div class="output" id="titleOutput"></div>
-
 </div>
 
-<!-- Emoji Enhancer -->
 
 <div class="tool-card">
 <h2>Emoji Enhancer</h2>
@@ -157,10 +154,8 @@ grid-template-columns:1fr;
 <button onclick="addEmojis()">Add Emojis</button>
 
 <div class="output" id="emojiOutput"></div>
-
 </div>
 
-<!-- Word Counter -->
 
 <div class="tool-card">
 <h2>Word Counter</h2>
@@ -170,10 +165,8 @@ grid-template-columns:1fr;
 <button onclick="countWords()">Count Words</button>
 
 <div class="output" id="wordOutput"></div>
-
 </div>
 
-<!-- Prompt Generator -->
 
 <div class="tool-card">
 <h2>Prompt Generator</h2>
@@ -181,10 +174,8 @@ grid-template-columns:1fr;
 <button onclick="generatePrompt()">Generate Prompt</button>
 
 <div class="output" id="promptOutput"></div>
-
 </div>
 
-<!-- Rap Song Generator -->
 
 <div class="tool-card">
 <h2>AI Rap Song Generator</h2>
@@ -194,7 +185,6 @@ grid-template-columns:1fr;
 <button onclick="generateRapSong()">Generate Rap Song</button>
 
 <div class="output" id="rapSongOutput"></div>
-
 </div>
 
 </div>
@@ -203,9 +193,8 @@ grid-template-columns:1fr;
 Free AI tools for content creators
 </footer>
 
-<script>
 
-/* HASHTAGS */
+<script>
 
 const hashtagDb={
 fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
@@ -224,7 +213,7 @@ document.getElementById("hashtagOutput").innerText=list.join(" ");
 
 }
 
-/* CLICKBAIT */
+
 
 const titles=[
 "You won't believe what happened with {topic}",
@@ -244,7 +233,7 @@ document.getElementById("titleOutput").innerText=template.replace("{topic}",topi
 
 }
 
-/* EMOJIS */
+
 
 const emojiMap={
 love:"❤️",
@@ -271,7 +260,7 @@ document.getElementById("emojiOutput").innerText=txt;
 
 }
 
-/* WORD COUNTER */
+
 
 function countWords(){
 
@@ -285,38 +274,31 @@ document.getElementById("wordOutput").innerText="Words: "+words+"\nCharacters: "
 
 }
 
-/* PROMPT GENERATOR */
+
 
 const subjects=["AI","Fitness","Marketing","Travel","Food"];
-
 const actions=["ideas","tips","strategies","guides"];
-
 const formats=["for TikTok","for Instagram","for YouTube","for blogs"];
 
 function generatePrompt(){
 
 const s=subjects[Math.floor(Math.random()*subjects.length)];
-
 const a=actions[Math.floor(Math.random()*actions.length)];
-
 const f=formats[Math.floor(Math.random()*formats.length)];
 
 document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
 
 }
 
-/* RAP SONG GENERATOR */
+
 
 function generateRapSong(){
 
 const text=document.getElementById("rapInput").value.trim();
 
 if(text===""){
-
 document.getElementById("rapSongOutput").innerText="Write some text first.";
-
 return;
-
 }
 
 const intros=[
@@ -338,13 +320,10 @@ const lines=text.split(/\n|\.|,/).filter(l=>l.trim()!="");
 let verse="";
 
 for(let i=0;i<Math.min(4,lines.length);i++){
-
 verse+=lines[i].trim()+"\n";
-
 }
 
 const intro=intros[Math.floor(Math.random()*intros.length)];
-
 const hook=hooks[Math.floor(Math.random()*hooks.length)];
 
 const song=
