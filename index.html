@@ -4,170 +4,142 @@
 <meta charset="UTF-8">
 <title>AI Tools for Creators</title>
 <style>
-/* --- Global Styles --- */
 body {
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background: #121212;
-  color: #f0f0f0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
   margin: 0;
-  padding: 0;
+  padding: 40px 20px;
+  color: #f0f0f0;
 }
 header {
   text-align: center;
-  padding: 60px 20px 40px;
-  background: linear-gradient(135deg, #1f1f1f, #1a1a1a);
+  margin-bottom: 50px;
 }
-header h1 {
-  color: #bb86fc;
-  font-size: 36px;
-  margin-bottom: 5px;
-}
-header .subtitle {
-  color: #aaa;
-  font-size: 16px;
-}
-
-/* --- Container --- */
+h1 { color: #bb86fc; margin-bottom: 5px; font-size: 36px; }
+.subtitle { color: #aaa; font-size: 16px; }
 .container {
-  max-width: 1100px;
-  margin: 40px auto;
+  max-width: 1000px;
+  margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 25px;
-  padding: 0 20px;
 }
-
-/* --- Tool Cards --- */
 .tool-card {
-  background: #1f1f1f;
+  background: rgba(30,30,30,0.95);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  transition: 0.25s;
 }
 .tool-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.85);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.85);
 }
-.tool-card h2 {
-  color: #bb86fc;
-  margin-top: 0;
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-
-/* --- Inputs & Buttons --- */
+h2 { margin-top:0; color:#bb86fc; font-size:20px; }
 input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border: 1px solid #444;
-  border-radius: 8px;
-  font-size: 15px;
-  background: #222;
-  color: #f0f0f0;
-  box-sizing: border-box;
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:1px solid #444;
+  border-radius:8px;
+  font-size:14px;
+  background:#222;
+  color:#f0f0f0;
+  box-sizing:border-box;
 }
-textarea { min-height: 100px; }
+textarea{ min-height:100px; }
 button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 12px;
-  background: #bb86fc;
-  color: #121212;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background 0.3s;
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  background:#bb86fc;
+  color:#121212;
+  border:none;
+  border-radius:8px;
+  font-size:15px;
+  cursor:pointer;
+  font-weight:bold;
 }
-button:hover { background: #985eff; }
-
-/* --- Output --- */
+button:hover{ background:#985eff; }
 .output {
-  margin-top: 14px;
-  background: #2c2c2c;
-  border: 1px solid #444;
-  padding: 14px;
-  border-radius: 8px;
-  white-space: pre-wrap;
-  font-size: 14px;
-  color: #f0f0f0;
+  margin-top:15px;
+  background:#2c2c2c;
+  border:1px solid #444;
+  padding:15px;
+  border-radius:8px;
+  white-space:pre-wrap;
+  font-size:14px;
+  color:#f0f0f0;
 }
-
-/* --- Footer --- */
 footer {
-  text-align: center;
-  padding: 30px 20px;
-  font-size: 14px;
-  color: #aaa;
-  margin-top: 50px;
-  border-top: 1px solid #333;
+  text-align:center;
+  margin-top:50px;
+  font-size:13px;
+  color:#aaa;
 }
-
-/* --- Responsive --- */
 @media(max-width:700px){ .container{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>AI Tools for Creators</h1>
-  <div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap</div>
+<h1>AI Tools for Creators</h1>
+<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap</div>
 </header>
 
 <div class="container">
 
-  <!-- Hashtag Generator -->
-  <div class="tool-card">
-    <h2>Hashtag Generator</h2>
-    <input id="topic" placeholder="Skriv emne fx 'fitness'">
-    <button onclick="generateHashtags()">Generate Hashtags</button>
-    <div class="output" id="hashtagOutput"></div>
-  </div>
+<!-- Hashtag Generator -->
+<div class="tool-card">
+<h2>Hashtag Generator</h2>
+<input id="topic" placeholder="Skriv emne fx 'fitness'">
+<button onclick="generateHashtags()">Generate Hashtags</button>
+<div class="output" id="hashtagOutput"></div>
+</div>
 
-  <!-- Clickbait Title Generator -->
-  <div class="tool-card">
-    <h2>Clickbait Title Generator</h2>
-    <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
-    <button onclick="generateTitle()">Generate Title</button>
-    <div class="output" id="titleOutput"></div>
-  </div>
+<!-- Clickbait Title Generator -->
+<div class="tool-card">
+<h2>Clickbait Title Generator</h2>
+<input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
+<button onclick="generateTitle()">Generate Title</button>
+<div class="output" id="titleOutput"></div>
+</div>
 
-  <!-- Emoji Enhancer -->
-  <div class="tool-card">
-    <h2>Emoji Enhancer</h2>
-    <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
-    <button onclick="addEmojis()">Add Emojis</button>
-    <div class="output" id="emojiOutput"></div>
-  </div>
+<!-- Emoji Enhancer -->
+<div class="tool-card">
+<h2>Emoji Enhancer</h2>
+<textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
+<button onclick="addEmojis()">Add Emojis</button>
+<div class="output" id="emojiOutput"></div>
+</div>
 
-  <!-- Word Counter -->
-  <div class="tool-card">
-    <h2>Word Counter</h2>
-    <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
-    <button onclick="countWords()">Count Words</button>
-    <div class="output" id="wordOutput"></div>
-  </div>
+<!-- Word Counter -->
+<div class="tool-card">
+<h2>Word Counter</h2>
+<textarea id="wordText" placeholder="Skriv tekst…"></textarea>
+<button onclick="countWords()">Count Words</button>
+<div class="output" id="wordOutput"></div>
+</div>
 
-  <!-- Prompt Generator -->
-  <div class="tool-card">
-    <h2>Prompt Generator</h2>
-    <button onclick="generatePrompt()">Generate Prompt</button>
-    <div class="output" id="promptOutput"></div>
-  </div>
+<!-- Prompt Generator -->
+<div class="tool-card">
+<h2>Prompt Generator</h2>
+<button onclick="generatePrompt()">Generate Prompt</button>
+<div class="output" id="promptOutput"></div>
+</div>
 
-  <!-- Rap Generator -->
-  <div class="tool-card">
-    <h2>AI Rap Song Generator</h2>
-    <textarea id="rapInput" placeholder="Skriv idé, tekst eller historie…"></textarea>
-    <button onclick="generateRapSong()">Generate Rap</button>
-    <div class="output" id="rapSongOutput"></div>
-  </div>
+<!-- Rap Generator -->
+<div class="tool-card">
+<h2>AI Rap Song Generator</h2>
+<textarea id="rapInput" placeholder="Skriv idé, tekst eller historie…"></textarea>
+<button onclick="generateRapSong()">Generate Rap</button>
+<div class="output" id="rapSongOutput"></div>
+</div>
 
 </div>
 
-<footer>Free AI tools for content creators</footer>
+<footer>© 2026 WellnessTop4 | Free AI tools for content creators</footer>
 
 <script>
 /* HASHTAGS */
@@ -233,7 +205,7 @@ function generateRapSong(){
   if(!text){ document.getElementById("rapSongOutput").innerText="Skriv tekst først."; return; }
   const lines=text.split(/\n|\.|,/).filter(l=>l.trim()!="");
   let rap="";
-  lines.forEach(l=>{
+  lines.forEach((l,i)=>{
     rap+="🎵 "+l+"\n";
   });
   document.getElementById("rapSongOutput").innerText=rap;
