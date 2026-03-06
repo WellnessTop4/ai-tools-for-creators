@@ -28,12 +28,12 @@ h1 { color: #bb86fc; margin-bottom: 5px; }
   background: #1f1f1f;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
   transition: 0.2s;
 }
 .tool-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.8);
 }
 h2 { margin-top:0; color:#bb86fc; font-size:18px; }
 input, textarea {
@@ -132,6 +132,7 @@ footer {
 <h2>AI Rap Song Generator</h2>
 <textarea id="rapInput" placeholder="Skriv idé, tekst eller historie…"></textarea>
 <button onclick="generateRapSong()">Generate Rap</button>
+<button onclick="downloadRap()">Download Rap</button>
 <div class="output" id="rapSongOutput"></div>
 </div>
 
@@ -140,21 +141,17 @@ footer {
 <footer>Free AI tools for content creators</footer>
 
 <script>
-/* HASHTAGS */
-const hashtagDb={
-  fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
-  travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
-  food:["#Food","#Foodie","#Delicious","#InstaFood","#Yummy"],
-  tech:["#Tech","#AI","#Innovation","#Future","#Startup"]
-};
+/* HASHTAGS - fleksibel */
 function generateHashtags(){
-  const topic=document.getElementById("topic").value.toLowerCase();
-  const list=hashtagDb[topic]||["#Content","#Creator","#Trending","#Viral","#Ideas"];
-  document.getElementById("hashtagOutput").innerText=list.join(" ");
+  const topic=document.getElementById("topic").value.trim();
+  if(!topic){ document.getElementById("hashtagOutput").innerText="Skriv et emne først."; return; }
+  const words = topic.split(/\s+/);
+  const tags = words.map(w=>"#"+w.replace(/[^a-zA-Z0-9]/g,"")).slice(0,5);
+  document.getElementById("hashtagOutput").innerText=tags.join(" ");
 }
 
-/* CLICKBAIT */
-const titles=[
+/* CLICKBAIT TITLE - fleksibel */
+const clickbaitTemplates=[
   "Du vil ikke tro hvad der skete med {topic}",
   "5 hemmeligheder om {topic} som ingen fortæller",
   "Hvordan {topic} ændrede alt",
@@ -162,8 +159,8 @@ const titles=[
   "Top tricks creators bruger til {topic}"
 ];
 function generateTitle(){
-  const topic=document.getElementById("clickbaitTopic").value||"dette emne";
-  const template=titles[Math.floor(Math.random()*titles.length)];
+  const topic=document.getElementById("clickbaitTopic").value.trim()||"dette emne";
+  const template=clickbaitTemplates[Math.floor(Math.random()*clickbaitTemplates.length)];
   document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
 }
 
@@ -201,14 +198,29 @@ function generatePrompt(){
 function generateRapSong(){
   const text=document.getElementById("rapInput").value.trim();
   if(!text){ document.getElementById("rapSongOutput").innerText="Skriv tekst først."; return; }
-  const lines=text.split(/\n|\.|,/).filter(l=>l.trim()!="");
+  const words=text.split(/\s+/);
   let rap="";
-  const beats=["🎤","🎵","🔥","💥"];
-  lines.forEach((l,i)=>{
-    const beat = beats[i % beats.length];
-    rap+=beat+" "+l+"\n";
-  });
+  for(let i=0;i<words.length;i++){
+    let w=words[i];
+    let rhyme = (i%2==0 ? w+"-yo" : w+"-yeah");
+    rap+="🎵 "+rhyme+" ";
+    if(i%6==5) rap+="\n"; 
+  }
   document.getElementById("rapSongOutput").innerText=rap;
+}
+
+/* DOWNLOAD RAP */
+function downloadRap(){
+  const rap=document.getElementById("rapSongOutput").innerText;
+  if(!rap){ alert("Generer først rappen!"); return; }
+  const blob=new Blob([rap], {type:"text/plain"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="rap_song.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 </script>
 
