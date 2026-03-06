@@ -6,7 +6,7 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: #121212 url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: #121212 url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 40px 20px;
@@ -18,6 +18,14 @@ header {
 }
 h1 { color: #bb86fc; margin-bottom: 5px; }
 .subtitle { color: #aaa; font-size: 14px; }
+#languageSelect {
+  margin-top:10px;
+  padding:5px;
+  border-radius:5px;
+  background:#1f1f1f;
+  color:#f0f0f0;
+  border:none;
+}
 .container {
   max-width: 1000px;
   margin: auto;
@@ -83,89 +91,144 @@ footer {
 <body>
 
 <header>
-<h1>AI Tools for Creators</h1>
-<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og bio</div>
+<h1 id="headerTitle">AI Tools for Creators</h1>
+<div class="subtitle" id="headerSubtitle">Gratis værktøjer til captions, hashtags, prompts og bio</div>
+<select id="languageSelect" onchange="setLanguage()">
+  <option value="da">Dansk</option>
+  <option value="en">English</option>
+</select>
 </header>
 
 <div class="container">
 
 <!-- Hashtag Generator -->
 <div class="tool-card">
-<h2>Hashtag Generator</h2>
+<h2 id="hashtagTitle">Hashtag Generator</h2>
 <input id="topic" placeholder="Skriv emne fx 'fitness'">
-<button onclick="generateHashtags()">Generate Hashtags</button>
+<button onclick="generateHashtags()" id="hashtagBtn">Generate Hashtags</button>
 <div class="output" id="hashtagOutput"></div>
 </div>
 
 <!-- Clickbait Title Generator -->
 <div class="tool-card">
-<h2>Clickbait Title Generator</h2>
+<h2 id="titleGenTitle">Clickbait Title Generator</h2>
 <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
-<button onclick="generateTitle()">Generate Title</button>
+<button onclick="generateTitle()" id="titleBtn">Generate Title</button>
 <div class="output" id="titleOutput"></div>
 </div>
 
 <!-- Emoji Enhancer -->
 <div class="tool-card">
-<h2>Emoji Enhancer</h2>
+<h2 id="emojiTitle">Emoji Enhancer</h2>
 <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
-<button onclick="addEmojis()">Add Emojis</button>
+<button onclick="addEmojis()" id="emojiBtn">Add Emojis</button>
 <div class="output" id="emojiOutput"></div>
 </div>
 
 <!-- Word Counter -->
 <div class="tool-card">
-<h2>Word Counter</h2>
+<h2 id="wordTitle">Word Counter</h2>
 <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
-<button onclick="countWords()">Count Words</button>
+<button onclick="countWords()" id="wordBtn">Count Words</button>
 <div class="output" id="wordOutput"></div>
 </div>
 
 <!-- Prompt Generator -->
 <div class="tool-card">
-<h2>Prompt Generator</h2>
-<button onclick="generatePrompt()">Generate Prompt</button>
+<h2 id="promptTitle">Prompt Generator</h2>
+<button onclick="generatePrompt()" id="promptBtn">Generate Prompt</button>
 <div class="output" id="promptOutput"></div>
 </div>
 
 <!-- Bio Generator -->
 <div class="tool-card">
-<h2>Bio Generator</h2>
-<input id="bioTopic" placeholder="Skriv emne fx 'fitness influencer'">
-<button onclick="generateBio()">Generate Bio</button>
+<h2 id="bioTitle">Bio Generator</h2>
+<input id="bioTopic" placeholder="Skriv kort info om dig selv">
+<button onclick="generateBio()" id="bioBtn">Generate Bio</button>
 <div class="output" id="bioOutput"></div>
 </div>
 
 </div>
 
-<footer>Free AI tools for content creators</footer>
+<footer id="footerText">Free AI tools for content creators</footer>
 
 <script>
-/* HASHTAGS */
-const hashtagDb={
-  fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
-  travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
-  food:["#Food","#Foodie","#Delicious","#InstaFood","#Yummy"],
-  tech:["#Tech","#AI","#Innovation","#Future","#Startup"]
+let lang = 'da';
+
+const texts = {
+  da: {
+    headerTitle: "AI Tools for Creators",
+    headerSubtitle: "Gratis værktøjer til captions, hashtags, prompts og bio",
+    hashtagTitle: "Hashtag Generator",
+    hashtagBtn: "Generer Hashtags",
+    titleGenTitle: "Clickbait Title Generator",
+    titleBtn: "Generer Titel",
+    emojiTitle: "Emoji Enhancer",
+    emojiBtn: "Tilføj Emojis",
+    wordTitle: "Word Counter",
+    wordBtn: "Tæl Ord",
+    promptTitle: "Prompt Generator",
+    promptBtn: "Generer Prompt",
+    bioTitle: "Bio Generator",
+    bioBtn: "Generer Bio",
+    footerText: "Gratis AI værktøjer til creators"
+  },
+  en: {
+    headerTitle: "AI Tools for Creators",
+    headerSubtitle: "Free tools for captions, hashtags, prompts and bio",
+    hashtagTitle: "Hashtag Generator",
+    hashtagBtn: "Generate Hashtags",
+    titleGenTitle: "Clickbait Title Generator",
+    titleBtn: "Generate Title",
+    emojiTitle: "Emoji Enhancer",
+    emojiBtn: "Add Emojis",
+    wordTitle: "Word Counter",
+    wordBtn: "Count Words",
+    promptTitle: "Prompt Generator",
+    promptBtn: "Generate Prompt",
+    bioTitle: "Bio Generator",
+    bioBtn: "Generate Bio",
+    footerText: "Free AI tools for content creators"
+  }
 };
+
+function setLanguage() {
+  lang = document.getElementById('languageSelect').value;
+  for (const id in texts[lang]) {
+    const el = document.getElementById(id);
+    if(el) el.innerText = texts[lang][id];
+  }
+}
+
+/* HASHTAGS */
 function generateHashtags(){
-  const topic=document.getElementById("topic").value.toLowerCase();
-  const list=hashtagDb[topic]||["#Content","#Creator","#Trending","#Viral","#Ideas"];
-  document.getElementById("hashtagOutput").innerText=list.join(" ");
+  const topic=document.getElementById("topic").value.trim();
+  if(!topic){ document.getElementById("hashtagOutput").innerText="Indtast et emne."; return; }
+  const words = topic.split(/\s+/);
+  const hashtags = words.map(w => "#"+w.replace(/[^a-zA-Z0-9]/g,'')).join(" ");
+  document.getElementById("hashtagOutput").innerText = hashtags;
 }
 
 /* CLICKBAIT */
-const titles=[
+const titlesDa=[
   "Du vil ikke tro hvad der skete med {topic}",
   "5 hemmeligheder om {topic} som ingen fortæller",
   "Hvordan {topic} ændrede alt",
   "Sandheden om {topic}",
   "Top tricks creators bruger til {topic}"
 ];
+const titlesEn=[
+  "You won't believe what happened with {topic}",
+  "5 secrets about {topic} nobody tells",
+  "How {topic} changed everything",
+  "The truth about {topic}",
+  "Top tricks creators use for {topic}"
+];
 function generateTitle(){
-  const topic=document.getElementById("clickbaitTopic").value||"dette emne";
-  const template=titles[Math.floor(Math.random()*titles.length)];
-  document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
+  const topic=document.getElementById("clickbaitTopic").value || (lang=='da'?'dette emne':'this topic');
+  const templates = lang=='da'? titlesDa : titlesEn;
+  const template=templates[Math.floor(Math.random()*templates.length)];
+  document.getElementById("titleOutput").innerText = template.replace("{topic}",topic);
 }
 
 /* EMOJIS */
@@ -200,16 +263,9 @@ function generatePrompt(){
 
 /* BIO GENERATOR */
 function generateBio(){
-  const topic = document.getElementById("bioTopic").value.trim() || "influencer";
-  const templates = [
-    `Passionate about ${topic} and inspiring others`,
-    `Sharing my journey in ${topic} every day`,
-    `Exploring ${topic} tips, tricks & lifestyle`,
-    `${topic} lover, dreamer & content creator`,
-    `Your go-to ${topic} inspiration`
-  ];
-  const bio = templates[Math.floor(Math.random()*templates.length)];
-  document.getElementById("bioOutput").innerText = bio;
+  const topic=document.getElementById("bioTopic").value.trim();
+  if(!topic){ document.getElementById("bioOutput").innerText="Skriv lidt info først."; return; }
+  document.getElementById("bioOutput").innerText="Creator passionate about "+topic;
 }
 </script>
 
