@@ -6,75 +6,89 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: #121212 url('https://images.unsplash.com/photo-1612831664084-69bfc71d7b2f?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+              url('https://images.unsplash.com/photo-1601597119241-8f7d11f5e8b6?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 40px 20px;
   color: #f0f0f0;
+  transition: background 0.5s ease;
 }
 header {
   text-align: center;
   margin-bottom: 40px;
-  text-shadow: 2px 2px 4px #000;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
 }
 h1 { color: #bb86fc; margin-bottom: 5px; }
-.subtitle { color: #aaa; font-size: 14px; text-shadow: 1px 1px 3px #000; }
+.subtitle { color: #aaa; font-size: 14px; }
 .container {
   max-width: 1000px;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 25px;
 }
 .tool-card {
-  background: rgba(31,31,31,0.95);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.8);
-  transition: 0.3s;
+  background: #1f1f1f;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 .tool-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.9);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.9);
+  background: #2a2a2a;
 }
-h2 { margin-top:0; color:#bb86fc; font-size:18px; }
+h2 { margin-top:0; color:#bb86fc; font-size:20px; }
 input, textarea {
   width:100%;
-  padding:10px;
-  margin-top:8px;
-  border:1px solid #444;
+  padding:12px;
+  margin-top:10px;
+  border:1px solid #555;
   border-radius:6px;
   font-size:14px;
   background:#333;
   color:#f0f0f0;
   box-sizing:border-box;
+  transition: border 0.3s ease, background 0.3s ease;
 }
-textarea{ min-height:90px; }
+input:focus, textarea:focus {
+  border-color:#bb86fc;
+  background:#2a2a2a;
+  outline:none;
+}
+textarea{ min-height:100px; }
 button {
   width:100%;
-  padding:10px;
-  margin-top:10px;
+  padding:12px;
+  margin-top:12px;
   background:#bb86fc;
   color:#121212;
   border:none;
   border-radius:6px;
   font-size:14px;
   cursor:pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
-button:hover{ background:#985eff; }
+button:hover{
+  background:#985eff;
+  transform: scale(1.02);
+}
 .output {
-  margin-top:12px;
+  margin-top:14px;
   background:#2c2c2c;
   border:1px solid #444;
-  padding:12px;
+  padding:14px;
   border-radius:6px;
   white-space:pre-wrap;
   font-size:14px;
   color:#f0f0f0;
+  transition: background 0.3s ease;
 }
 footer {
   text-align:center;
-  margin-top:40px;
+  margin-top:50px;
   font-size:13px;
   color:#aaa;
 }
@@ -85,7 +99,7 @@ footer {
 
 <header>
 <h1>AI Tools for Creators</h1>
-<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og bio</div>
+<div class="subtitle">Gratis værktøjer til captions, hashtags og prompts</div>
 </header>
 
 <div class="container">
@@ -129,17 +143,9 @@ footer {
 <div class="output" id="promptOutput"></div>
 </div>
 
-<!-- Bio / Caption Generator -->
-<div class="tool-card">
-<h2>AI Bio / Caption Generator</h2>
-<textarea id="bioInput" placeholder="Skriv emne eller niche…"></textarea>
-<button onclick="generateBio()">Generate Bio</button>
-<div class="output" id="bioOutput"></div>
 </div>
 
-</div>
-
-<footer>Gratis AI værktøjer til content creators</footer>
+<footer>Free AI tools for content creators</footer>
 
 <script>
 /* HASHTAGS */
@@ -197,21 +203,6 @@ function generatePrompt(){
   const a=actions[Math.floor(Math.random()*actions.length)];
   const f=formats[Math.floor(Math.random()*formats.length)];
   document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
-}
-
-/* BIO / CAPTION GENERATOR */
-function generateBio(){
-  const topic=document.getElementById("bioInput").value.trim();
-  if(!topic){ document.getElementById("bioOutput").innerText="Skriv noget tekst først."; return; }
-  const templates=[
-    "Create a catchy bio about {topic}",
-    "{topic} vibes only!",
-    "All about {topic} in one line",
-    "Get noticed for {topic}",
-    "Short & punchy {topic} caption"
-  ];
-  const template=templates[Math.floor(Math.random()*templates.length)];
-  document.getElementById("bioOutput").innerText=template.replace("{topic}",topic);
 }
 </script>
 
