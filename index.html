@@ -6,26 +6,21 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: url('https://images.unsplash.com/photo-1522202222803-ff3e436a7f42?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
-  background-size: cover;
+  background: #121212;
   margin: 0;
   padding: 40px 20px;
   color: #f0f0f0;
 }
-body::before {
-  content: "";
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(18,18,18,0.8);
-  z-index: -1;
-}
 header {
   text-align: center;
   margin-bottom: 40px;
+  background: linear-gradient(135deg, #1f1f1f 0%, #2c2c2c 100%);
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
-h1 { color: #bb86fc; margin-bottom: 5px; }
-.subtitle { color: #aaa; font-size: 14px; }
+h1 { color: #bb86fc; margin-bottom: 5px; font-size: 36px; }
+.subtitle { color: #aaa; font-size: 16px; }
 .container {
   max-width: 1000px;
   margin: auto;
@@ -34,17 +29,17 @@ h1 { color: #bb86fc; margin-bottom: 5px; }
   gap: 20px;
 }
 .tool-card {
-  background: rgba(31,31,31,0.85);
+  background: #1f1f1f;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.7);
-  transition: 0.3s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+  transition: 0.2s;
 }
 .tool-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.85);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
-h2 { margin-top:0; color:#bb86fc; font-size:18px; }
+h2 { margin-top:0; color:#bb86fc; font-size:20px; }
 input, textarea {
   width:100%;
   padding:10px;
@@ -56,10 +51,10 @@ input, textarea {
   color:#f0f0f0;
   box-sizing:border-box;
 }
-textarea{ min-height:90px; }
+textarea{ min-height:100px; }
 button {
   width:100%;
-  padding:10px;
+  padding:12px;
   margin-top:10px;
   background:#bb86fc;
   color:#121212;
@@ -67,11 +62,12 @@ button {
   border-radius:6px;
   font-size:14px;
   cursor:pointer;
+  transition: 0.2s;
 }
 button:hover{ background:#985eff; }
 .output {
   margin-top:12px;
-  background: rgba(44,44,44,0.9);
+  background:#2c2c2c;
   border:1px solid #444;
   padding:12px;
   border-radius:6px;
@@ -92,7 +88,7 @@ footer {
 
 <header>
 <h1>AI Tools for Creators</h1>
-<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap</div>
+<div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap med flow</div>
 </header>
 
 <div class="container">
@@ -138,7 +134,7 @@ footer {
 
 <!-- Rap Generator -->
 <div class="tool-card">
-<h2>AI Rap Song Generator</h2>
+<h2>AI Rap Generator</h2>
 <textarea id="rapInput" placeholder="Skriv idé, tekst eller historie…"></textarea>
 <button onclick="generateRapSong()">Generate Rap</button>
 <div class="output" id="rapSongOutput"></div>
@@ -149,7 +145,7 @@ footer {
 <footer>Free AI tools for content creators</footer>
 
 <script>
-/* HASHTAGS */
+/* --- Hashtag Generator --- */
 const hashtagDb={
   fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
   travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
@@ -162,7 +158,7 @@ function generateHashtags(){
   document.getElementById("hashtagOutput").innerText=list.join(" ");
 }
 
-/* CLICKBAIT */
+/* --- Clickbait Title Generator --- */
 const titles=[
   "Du vil ikke tro hvad der skete med {topic}",
   "5 hemmeligheder om {topic} som ingen fortæller",
@@ -176,7 +172,7 @@ function generateTitle(){
   document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
 }
 
-/* EMOJIS */
+/* --- Emoji Enhancer --- */
 const emojiMap={ love:"❤️", coffee:"☕", travel:"🌍", happy:"😊", food:"🍔", star:"⭐" };
 function addEmojis(){
   let txt=document.getElementById("emojiText").value;
@@ -187,7 +183,7 @@ function addEmojis(){
   document.getElementById("emojiOutput").innerText=txt;
 }
 
-/* WORD COUNTER */
+/* --- Word Counter --- */
 function countWords(){
   const txt=document.getElementById("wordText").value.trim();
   const words=txt?txt.split(/\s+/).length:0;
@@ -195,7 +191,7 @@ function countWords(){
   document.getElementById("wordOutput").innerText="Words: "+words+"\nCharacters: "+chars;
 }
 
-/* PROMPT GENERATOR */
+/* --- Prompt Generator --- */
 const subjects=["AI","Fitness","Marketing","Travel","Food"];
 const actions=["ideas","tips","strategies","guides"];
 const formats=["for TikTok","for Instagram","for YouTube","for blogs"];
@@ -206,14 +202,16 @@ function generatePrompt(){
   document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
 }
 
-/* RAP GENERATOR */
+/* --- Human-style Rap Generator --- */
+const rhymeWords=["flow","show","go","know","blow","grow","low","yo","pro","ho"];
 function generateRapSong(){
-  const text=document.getElementById("rapInput").value.trim();
-  if(!text){ document.getElementById("rapSongOutput").innerText="Skriv tekst først."; return; }
-  const lines=text.split(/\n|\.|,/).filter(l=>l.trim()!="");
+  const input=document.getElementById("rapInput").value.trim();
+  if(!input){ document.getElementById("rapSongOutput").innerText="Skriv tekst først."; return; }
+  const lines=input.split(/\n|\.|,/).filter(l=>l.trim()!="");
   let rap="";
-  lines.forEach((l,i)=>{
-    rap+="🎵 "+l+"\n";
+  lines.forEach((line)=>{
+    const rhyme=rhymeWords[Math.floor(Math.random()*rhymeWords.length)];
+    rap+="🎤 "+line+" "+rhyme+"\n";
   });
   document.getElementById("rapSongOutput").innerText=rap;
 }
