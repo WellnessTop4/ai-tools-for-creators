@@ -123,12 +123,14 @@
 <footer>Free AI tools for content creators</footer>
 
 <script>
-// Hashtag Generator
+// HASHTAG GENERATOR
 const hashtagDb = {
     fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
     travel: ["#Travel", "#Adventure", "#Explore", "#Wanderlust", "#TravelLife"],
     food: ["#Food", "#Foodie", "#Delicious", "#InstaFood", "#Yummy"],
-    tech: ["#Tech", "#AI", "#Innovation", "#Future", "#Startup"]
+    tech: ["#Tech", "#AI", "#Innovation", "#Future", "#Startup"],
+    bird: ["#Birds", "#BirdWatching", "#Nature", "#Wildlife", "#BirdLover"],
+    man: ["#ManPower", "#MensHealth", "#FitnessForMen", "#MensStyle"]
 };
 function generateHashtags() {
     const topic = document.getElementById("topic").value.toLowerCase();
@@ -136,7 +138,7 @@ function generateHashtags() {
     document.getElementById("hashtagOutput").innerText = list.join(" ");
 }
 
-// Clickbait Title Generator
+// CLICKBAIT TITLE GENERATOR
 const titles = [
     "Du vil ikke tro hvad der skete med {topic}",
     "5 hemmeligheder om {topic} som ingen fortæller",
@@ -150,7 +152,7 @@ function generateTitle() {
     document.getElementById("titleOutput").innerText = template.replace("{topic}", topic);
 }
 
-// Emoji Enhancer
+// EMOJI ENHANCER
 const emojiMap = { love: "❤️", coffee: "☕", travel: "🌍", happy: "😊", food: "🍔", star: "⭐" };
 function addEmojis() {
     let txt = document.getElementById("emojiText").value;
@@ -161,7 +163,7 @@ function addEmojis() {
     document.getElementById("emojiOutput").innerText = txt;
 }
 
-// Word Counter
+// WORD COUNTER
 function countWords() {
     const txt = document.getElementById("wordText").value.trim();
     const words = txt ? txt.split(/\s+/).length : 0;
