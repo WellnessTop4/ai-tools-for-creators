@@ -4,225 +4,243 @@
 <meta charset="UTF-8">
 <title>AI Tools for Creators</title>
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #121212;
-  margin: 0;
-  padding: 40px 20px;
-  color: #f0f0f0;
-  background-image: url('https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?auto=format&fit=crop&w=1950&q=80');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-header { text-align:center; margin-bottom:20px; }
-h1 { color:#bb86fc; margin-bottom:5px; }
-.subtitle { color:#aaa; font-size:14px; }
-.container { max-width:1000px; margin:auto; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.tool-card {
-  background: rgba(31,31,31,0.9);
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 4px 14px rgba(0,0,0,0.6);
-  transition:0.2s;
-}
-.tool-card:hover { transform: translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.8); }
-h2 { margin-top:0; color:#bb86fc; font-size:18px; }
-input, textarea { width:100%; padding:10px; margin-top:8px; border:1px solid #444; border-radius:6px; font-size:14px; background:#333; color:#f0f0f0; box-sizing:border-box; }
-textarea{ min-height:90px; }
-button { width:100%; padding:10px; margin-top:10px; background:#bb86fc; color:#121212; border:none; border-radius:6px; font-size:14px; cursor:pointer; }
-button:hover{ background:#985eff; }
-.output { margin-top:12px; background:#2c2c2c; border:1px solid #444; padding:12px; border-radius:6px; white-space:pre-wrap; font-size:14px; color:#f0f0f0; }
-footer { text-align:center; margin-top:40px; font-size:13px; color:#aaa; }
-.language-select { text-align:center; margin-bottom:30px; }
-@media(max-width:700px){ .container{ grid-template-columns:1fr; } }
+    body {
+        font-family: Arial, sans-serif;
+        background: #121212;
+        margin: 0;
+        padding: 40px 20px;
+        color: #f0f0f0;
+    }
+    header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    h1 { color: #bb86fc; margin-bottom: 5px; }
+    .subtitle { color: #aaa; font-size: 14px; }
+    
+    .tabs {
+        display: flex;
+        justify-content: center;
+        background: #333;
+        border-radius: 6px;
+    }
+    .tab {
+        padding: 15px 20px;
+        color: #fff;
+        cursor: pointer;
+        text-align: center;
+        flex-grow: 1;
+    }
+    .tab:hover {
+        background-color: #985eff;
+    }
+    .tab-content {
+        display: none;
+        margin-top: 20px;
+    }
+    .active {
+        display: block;
+    }
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .tool-card {
+        background: #1f1f1f;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+        transition: 0.2s;
+    }
+    .tool-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    }
+    h2 { margin-top:0; color:#bb86fc; font-size:18px; }
+    input, textarea {
+        width:100%;
+        padding:10px;
+        margin-top:8px;
+        border:1px solid #444;
+        border-radius:6px;
+        font-size:14px;
+        background:#333;
+        color:#f0f0f0;
+        box-sizing:border-box;
+    }
+    textarea{ min-height:90px; }
+    button {
+        width:100%;
+        padding:10px;
+        margin-top:10px;
+        background:#bb86fc;
+        color:#121212;
+        border:none;
+        border-radius:6px;
+        font-size:14px;
+        cursor:pointer;
+    }
+    button:hover{ background:#985eff; }
+    .output {
+        margin-top:12px;
+        background:#2c2c2c;
+        border:1px solid #444;
+        padding:12px;
+        border-radius:6px;
+        white-space:pre-wrap;
+        font-size:14px;
+        color:#f0f0f0;
+    }
+    footer {
+        text-align:center;
+        margin-top:40px;
+        font-size:13px;
+        color:#aaa;
+    }
+    @media(max-width:700px){ .container{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 
 <header>
-<h1>AI Tools for Creators</h1>
-<div class="subtitle" id="subtitle">Gratis værktøjer til captions, hashtags, prompts og bio</div>
+    <h1>AI Tools for Creators</h1>
+    <div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap</div>
 </header>
 
-<div class="language-select">
-<select id="langSelect" onchange="changeLanguage()">
-  <option value="da">Dansk</option>
-  <option value="en">English</option>
-  <option value="ar">العربية</option>
-  <option value="fr">Français</option>
-  <option value="de">Deutsch</option>
-  <option value="zh">中文</option>
-  <option value="es">Español</option>
-</select>
+<!-- Tabs for each tool category -->
+<div class="tabs">
+    <div class="tab" onclick="openTab('tools')">AI Tools</div>
+    <div class="tab" onclick="openTab('converter')">Audio & Video Converter</div>
+    <div class="tab" onclick="openTab('image')">Image Tools</div>
+    <div class="tab" onclick="openTab('language')">Language</div>
+    <div class="tab" onclick="openTab('text')">Text Tools</div>
 </div>
 
-<div class="container">
+<!-- Tab Content -->
+<div id="tools" class="tab-content active">
+    <div class="container">
+        <!-- Hashtag Generator -->
+        <div class="tool-card">
+            <h2>Hashtag Generator</h2>
+            <input id="topic" placeholder="Skriv emne fx 'fitness'">
+            <button onclick="generateHashtags()">Generate Hashtags</button>
+            <div class="output" id="hashtagOutput"></div>
+        </div>
 
-<!-- Hashtag Generator -->
-<div class="tool-card">
-<h2 id="hashtagTitle">Hashtag Generator</h2>
-<input id="topic" placeholder="Skriv emne fx 'fitness' eller 'fugl'">
-<button id="hashtagBtn" onclick="generateHashtags()">Generate Hashtags</button>
-<div class="output" id="hashtagOutput"></div>
+        <!-- Clickbait Title Generator -->
+        <div class="tool-card">
+            <h2>Clickbait Title Generator</h2>
+            <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
+            <button onclick="generateTitle()">Generate Title</button>
+            <div class="output" id="titleOutput"></div>
+        </div>
+        
+        <!-- Emoji Enhancer -->
+        <div class="tool-card">
+            <h2>Emoji Enhancer</h2>
+            <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
+            <button onclick="addEmojis()">Add Emojis</button>
+            <div class="output" id="emojiOutput"></div>
+        </div>
+
+        <!-- Word Counter -->
+        <div class="tool-card">
+            <h2>Word Counter</h2>
+            <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
+            <button onclick="countWords()">Count Words</button>
+            <div class="output" id="wordOutput"></div>
+        </div>
+    </div>
 </div>
 
-<!-- Clickbait Title Generator -->
-<div class="tool-card">
-<h2 id="clickbaitTitle">Clickbait Title Generator</h2>
-<input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
-<button id="clickbaitBtn" onclick="generateTitle()">Generate Title</button>
-<div class="output" id="titleOutput"></div>
+<!-- Audio & Video Converter -->
+<div id="converter" class="tab-content">
+    <h2>Convert Audio & Video Files</h2>
+    <p>MP3 → WAV, MP3 → FLAC, WAV → MP3, and more!</p>
+    <button>Upload File to Convert</button>
+    <!-- Converter content here -->
 </div>
 
-<!-- Emoji Enhancer -->
-<div class="tool-card">
-<h2 id="emojiTitle">Emoji Enhancer</h2>
-<textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
-<button id="emojiBtn" onclick="addEmojis()">Add Emojis</button>
-<div class="output" id="emojiOutput"></div>
+<!-- Image Tools -->
+<div id="image" class="tab-content">
+    <h2>Image Tools</h2>
+    <p>Image Compressor, JPG → PNG, PNG → JPG, etc.</p>
+    <button>Upload Image</button>
+    <!-- Image tools content here -->
 </div>
 
-<!-- Word Counter -->
-<div class="tool-card">
-<h2 id="wordTitle">Word Counter</h2>
-<textarea id="wordText" placeholder="Skriv tekst…"></textarea>
-<button id="wordBtn" onclick="countWords()">Count Words</button>
-<div class="output" id="wordOutput"></div>
+<!-- Language Selection -->
+<div id="language" class="tab-content">
+    <h2>Select Your Language</h2>
+    <button>English</button>
+    <button>Dansk</button>
+    <button>Español</button>
+    <button>Français</button>
+    <button>Deutsch</button>
+    <button>Arabic</button>
+    <!-- Language selection content here -->
 </div>
 
-<!-- Prompt Generator -->
-<div class="tool-card">
-<h2 id="promptTitle">Prompt Generator</h2>
-<button id="promptBtn" onclick="generatePrompt()">Generate Prompt</button>
-<div class="output" id="promptOutput"></div>
+<!-- Text Tools -->
+<div id="text" class="tab-content">
+    <h2>Text Tools</h2>
+    <button>Summarize Text</button>
+    <button>Generate Titles</button>
+    <button>Generate Descriptions</button>
+    <!-- Text Tools content here -->
 </div>
 
-<!-- Bio Generator -->
-<div class="tool-card">
-<h2 id="bioTitle">Bio Generator</h2>
-<input id="bioName" placeholder="Skriv navn eller niche">
-<button id="bioBtn" onclick="generateBio()">Generate Bio</button>
-<div class="output" id="bioOutput"></div>
-</div>
-
-</div>
-
-<footer id="footerText">Free AI tools for content creators</footer>
+<footer>Free AI tools for content creators</footer>
 
 <script>
-// Sprogtekster
-const texts = {
-  da: { subtitle:"Gratis værktøjer til captions, hashtags, prompts og bio", hashtagBtn:"Generate Hashtags", clickbaitBtn:"Generate Title", emojiBtn:"Add Emojis", wordBtn:"Count Words", promptBtn:"Generate Prompt", bioBtn:"Generate Bio", hashtagTitle:"Hashtag Generator", clickbaitTitle:"Clickbait Title Generator", emojiTitle:"Emoji Enhancer", wordTitle:"Word Counter", promptTitle:"Prompt Generator", bioTitle:"Bio Generator", footer:"Free AI tools for content creators" },
-  en: { subtitle:"Free tools for captions, hashtags, prompts and bio", hashtagBtn:"Generate Hashtags", clickbaitBtn:"Generate Title", emojiBtn:"Add Emojis", wordBtn:"Count Words", promptBtn:"Generate Prompt", bioBtn:"Generate Bio", hashtagTitle:"Hashtag Generator", clickbaitTitle:"Clickbait Title Generator", emojiTitle:"Emoji Enhancer", wordTitle:"Word Counter", promptTitle:"Prompt Generator", bioTitle:"Bio Generator", footer:"Free AI tools for content creators" },
-  fr: { subtitle:"Outils gratuits pour légendes, hashtags, prompts et bio", hashtagBtn:"Générer Hashtags", clickbaitBtn:"Générer Titre", emojiBtn:"Ajouter Emojis", wordBtn:"Compter Mots", promptBtn:"Générer Prompt", bioBtn:"Générer Bio", hashtagTitle:"Générateur de Hashtags", clickbaitTitle:"Générateur de Titres Clickbait", emojiTitle:"Améliorateur d'Émojis", wordTitle:"Compteur de Mots", promptTitle:"Générateur de Prompts", bioTitle:"Générateur de Bio", footer:"Outils AI gratuits pour créateurs" },
-  de: { subtitle:"Kostenlose Tools für Captions, Hashtags, Prompts und Bio", hashtagBtn:"Hashtags generieren", clickbaitBtn:"Titel generieren", emojiBtn:"Emojis hinzufügen", wordBtn:"Wörter zählen", promptBtn:"Prompt generieren", bioBtn:"Bio generieren", hashtagTitle:"Hashtag Generator", clickbaitTitle:"Clickbait Titel Generator", emojiTitle:"Emoji Enhancer", wordTitle:"Wortzähler", promptTitle:"Prompt Generator", bioTitle:"Bio Generator", footer:"Kostenlose AI Tools für Creator" },
-  es: { subtitle:"Herramientas gratuitas para captions, hashtags, prompts y bio", hashtagBtn:"Generar Hashtags", clickbaitBtn:"Generar Título", emojiBtn:"Añadir Emojis", wordBtn:"Contar Palabras", promptBtn:"Generar Prompt", bioBtn:"Generar Bio", hashtagTitle:"Generador de Hashtags", clickbaitTitle:"Generador de Títulos Clickbait", emojiTitle:"Mejorador de Emojis", wordTitle:"Contador de Palabras", promptTitle:"Generador de Prompts", bioTitle:"Generador de Bio", footer:"Herramientas AI gratuitas para creadores" },
-  zh: { subtitle:"免费工具，用于标题、标签、提示和简介", hashtagBtn:"生成标签", clickbaitBtn:"生成标题", emojiBtn:"添加表情", wordBtn:"字数统计", promptBtn:"生成提示", bioBtn:"生成简介", hashtagTitle:"标签生成器", clickbaitTitle:"标题生成器", emojiTitle:"表情增强器", wordTitle:"字数统计器", promptTitle:"提示生成器", bioTitle:"简介生成器", footer:"内容创作者免费AI工具" },
-  ar: { subtitle:"أدوات مجانية للتعليقات التوضيحية، الوسوم، البرومبت والسيرة الذاتية", hashtagBtn:"إنشاء وسوم", clickbaitBtn:"إنشاء عنوان", emojiBtn:"إضافة رموز", wordBtn:"عدد الكلمات", promptBtn:"إنشاء برومبت", bioBtn:"إنشاء سيرة", hashtagTitle:"مولد الوسوم", clickbaitTitle:"مولد العناوين الجذابة", emojiTitle:"محسن الرموز التعبيرية", wordTitle:"عداد الكلمات", promptTitle:"مولد البرومبت", bioTitle:"مولد السيرة", footer:"أدوات AI مجانية للمبدعين" }
-};
-
-// Skift sprog
-function changeLanguage(){
-  const lang = document.getElementById("langSelect").value;
-  const t = texts[lang];
-  document.getElementById("subtitle").innerText = t.subtitle;
-  document.getElementById("hashtagBtn").innerText = t.hashtagBtn;
-  document.getElementById("clickbaitBtn").innerText = t.clickbaitBtn;
-  document.getElementById("emojiBtn").innerText = t.emojiBtn;
-  document.getElementById("wordBtn").innerText = t.wordBtn;
-  document.getElementById("promptBtn").innerText = t.promptBtn;
-  document.getElementById("bioBtn").innerText = t.bioBtn;
-  document.getElementById("hashtagTitle").innerText = t.hashtagTitle;
-  document.getElementById("clickbaitTitle").innerText = t.clickbaitTitle;
-  document.getElementById("emojiTitle").innerText = t.emojiTitle;
-  document.getElementById("wordTitle").innerText = t.wordTitle;
-  document.getElementById("promptTitle").innerText = t.promptTitle;
-  document.getElementById("bioTitle").innerText = t.bioTitle;
-  document.getElementById("footerText").innerText = t.footer;
+// Tab switching function
+function openTab(tabName) {
+    let tabs = document.querySelectorAll(".tab-content");
+    tabs.forEach(tab => tab.classList.remove("active"));
+    document.getElementById(tabName).classList.add("active");
 }
 
-/* HASHTAGS */
-const hashtagDb={
-  fitness:["#Fitness","#Gym","#Workout","#Health","#FitLife"],
-  travel:["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
-  food:["#Food","#Foodie","#Delicious","#InstaFood","#Yummy"],
-  tech:["#Tech","#AI","#Innovation","#Future","#Startup"],
-  fugl:["#Bird","#Nature","#Birdwatching","#Feathers","#Flying"],
-  mand:["#Man","#Style","#MensFashion","#MensHealth","#Gentleman"],
-  hund:["#Dog","#Puppy","#DogLover","#PetLife","#Dogstagram"]
+// Hashtag Generator
+const hashtagDb = {
+    fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
+    travel: ["#Travel", "#Adventure", "#Explore", "#Wanderlust", "#TravelLife"],
+    food: ["#Food", "#Foodie", "#Delicious", "#InstaFood", "#Yummy"],
+    tech: ["#Tech", "#AI", "#Innovation", "#Future", "#Startup"]
 };
-function generateHashtags(){
-  const input=document.getElementById("topic").value.toLowerCase();
-  let hashtags=[];
-  const words=input.split(/\s+/);
-  for(const word of words){
-    if(hashtagDb[word]){
-      hashtags=hashtags.concat(hashtagDb[word]);
-    }
-  }
-  if(hashtags.length===0){ hashtags=["#Content","#Creator","#Trending","#Viral","#Ideas"]; }
-  document.getElementById("hashtagOutput").innerText=hashtags.join(" ");
+function generateHashtags() {
+    const topic = document.getElementById("topic").value.toLowerCase();
+    const list = hashtagDb[topic] || ["#Content", "#Creator", "#Trending", "#Viral", "#Ideas"];
+    document.getElementById("hashtagOutput").innerText = list.join(" ");
 }
 
-/* CLICKBAIT */
-const titles=[
-  "Du vil ikke tro hvad der skete med {topic}",
-  "5 hemmeligheder om {topic} som ingen fortæller",
-  "Hvordan {topic} ændrede alt",
-  "Sandheden om {topic}",
-  "Top tricks creators bruger til {topic}"
+// Clickbait Title Generator
+const titles = [
+    "Du vil ikke tro hvad der skete med {topic}",
+    "5 hemmeligheder om {topic} som ingen fortæller",
+    "Hvordan {topic} ændrede alt",
+    "Sandheden om {topic}",
+    "Top tricks creators bruger til {topic}"
 ];
-function generateTitle(){
-  const topic=document.getElementById("clickbaitTopic").value||"dette emne";
-  const template=titles[Math.floor(Math.random()*titles.length)];
-  document.getElementById("titleOutput").innerText=template.replace("{topic}",topic);
+function generateTitle() {
+    const topic = document.getElementById("clickbaitTopic").value || "dette emne";
+    const template = titles[Math.floor(Math.random() * titles.length)];
+    document.getElementById("titleOutput").innerText = template.replace("{topic}", topic);
 }
 
-/* EMOJIS */
-const emojiMap={ love:"❤️", coffee:"☕", travel:"🌍", happy:"😊", food:"🍔", star:"⭐" };
-function addEmojis(){
-  let txt=document.getElementById("emojiText").value;
-  for(const word in emojiMap){
-    const re=new RegExp("\\b"+word+"\\b","gi");
-    txt=txt.replace(re,emojiMap[word]+" "+word);
-  }
-  document.getElementById("emojiOutput").innerText=txt;
+// Emoji Enhancer
+const emojiMap = { love: "❤️", coffee: "☕", travel: "🌍", happy: "😊", food: "🍔", star: "⭐" };
+function addEmojis() {
+    let txt = document.getElementById("emojiText").value;
+    for (const word in emojiMap) {
+        const re = new RegExp("\\b" + word + "\\b", "gi");
+        txt = txt.replace(re, emojiMap[word] + " " + word);
+    }
+    document.getElementById("emojiOutput").innerText = txt;
 }
 
-/* WORD COUNTER */
-function countWords(){
-  const txt=document.getElementById("wordText").value.trim();
-  const words=txt?txt.split(/\s+/).length:0;
-  const chars=txt.length;
-  document.getElementById("wordOutput").innerText="Words: "+words+"\nCharacters: "+chars;
-}
-
-/* PROMPT GENERATOR */
-const subjects=["AI","Fitness","Marketing","Travel","Food"];
-const actions=["ideas","tips","strategies","guides"];
-const formats=["for TikTok","for Instagram","for YouTube","for blogs"];
-function generatePrompt(){
-  const s=subjects[Math.floor(Math.random()*subjects.length)];
-  const a=actions[Math.floor(Math.random()*actions.length)];
-  const f=formats[Math.floor(Math.random()*formats.length)];
-  document.getElementById("promptOutput").innerText="Create "+a+" about "+s+" "+f;
-}
-
-/* BIO GENERATOR */
-function generateBio(){
-  const name=document.getElementById("bioName").value.trim();
-  if(!name){ document.getElementById("bioOutput").innerText="Skriv navn eller niche først."; return; }
-  const templates=[
-    `Creative mind in ${name}`,
-    `Sharing best ${name} tips daily`,
-    `Passionate about ${name} and innovation`,
-    `${name} enthusiast and content creator`,
-    `Making ${name} fun and engaging`
-  ];
-  document.getElementById("bioOutput").innerText=templates[Math.floor(Math.random()*templates.length)];
-}
-</script>
-
-</body>
-</html>
+// Word Counter
+function countWords() {
+    const txt = document.getElementBy
