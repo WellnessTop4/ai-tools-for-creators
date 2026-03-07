@@ -17,30 +17,7 @@
     }
     h1 { color: #bb86fc; margin-bottom: 5px; }
     .subtitle { color: #aaa; font-size: 14px; }
-    
-    .tabs {
-        display: flex;
-        justify-content: center;
-        background: #333;
-        border-radius: 6px;
-    }
-    .tab {
-        padding: 15px 20px;
-        color: #fff;
-        cursor: pointer;
-        text-align: center;
-        flex-grow: 1;
-    }
-    .tab:hover {
-        background-color: #985eff;
-    }
-    .tab-content {
-        display: none;
-        margin-top: 20px;
-    }
-    .active {
-        display: block;
-    }
+
     .container {
         max-width: 1000px;
         margin: auto;
@@ -100,109 +77,52 @@
         font-size:13px;
         color:#aaa;
     }
-    @media(max-width:700px){ .container{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 
 <header>
     <h1>AI Tools for Creators</h1>
-    <div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og rap</div>
+    <div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og emoji forbedringer</div>
 </header>
 
-<!-- Tabs for each tool category -->
-<div class="tabs">
-    <div class="tab" onclick="openTab('tools')">AI Tools</div>
-    <div class="tab" onclick="openTab('converter')">Audio & Video Converter</div>
-    <div class="tab" onclick="openTab('image')">Image Tools</div>
-    <div class="tab" onclick="openTab('language')">Language</div>
-    <div class="tab" onclick="openTab('text')">Text Tools</div>
-</div>
-
-<!-- Tab Content -->
-<div id="tools" class="tab-content active">
-    <div class="container">
-        <!-- Hashtag Generator -->
-        <div class="tool-card">
-            <h2>Hashtag Generator</h2>
-            <input id="topic" placeholder="Skriv emne fx 'fitness'">
-            <button onclick="generateHashtags()">Generate Hashtags</button>
-            <div class="output" id="hashtagOutput"></div>
-        </div>
-
-        <!-- Clickbait Title Generator -->
-        <div class="tool-card">
-            <h2>Clickbait Title Generator</h2>
-            <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
-            <button onclick="generateTitle()">Generate Title</button>
-            <div class="output" id="titleOutput"></div>
-        </div>
-        
-        <!-- Emoji Enhancer -->
-        <div class="tool-card">
-            <h2>Emoji Enhancer</h2>
-            <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
-            <button onclick="addEmojis()">Add Emojis</button>
-            <div class="output" id="emojiOutput"></div>
-        </div>
-
-        <!-- Word Counter -->
-        <div class="tool-card">
-            <h2>Word Counter</h2>
-            <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
-            <button onclick="countWords()">Count Words</button>
-            <div class="output" id="wordOutput"></div>
-        </div>
+<div class="container">
+    <!-- Hashtag Generator -->
+    <div class="tool-card">
+        <h2>Hashtag Generator</h2>
+        <input id="topic" placeholder="Skriv emne fx 'fitness'">
+        <button onclick="generateHashtags()">Generate Hashtags</button>
+        <div class="output" id="hashtagOutput"></div>
     </div>
-</div>
 
-<!-- Audio & Video Converter -->
-<div id="converter" class="tab-content">
-    <h2>Convert Audio & Video Files</h2>
-    <p>MP3 → WAV, MP3 → FLAC, WAV → MP3, and more!</p>
-    <button>Upload File to Convert</button>
-    <!-- Converter content here -->
-</div>
+    <!-- Clickbait Title Generator -->
+    <div class="tool-card">
+        <h2>Clickbait Title Generator</h2>
+        <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
+        <button onclick="generateTitle()">Generate Title</button>
+        <div class="output" id="titleOutput"></div>
+    </div>
 
-<!-- Image Tools -->
-<div id="image" class="tab-content">
-    <h2>Image Tools</h2>
-    <p>Image Compressor, JPG → PNG, PNG → JPG, etc.</p>
-    <button>Upload Image</button>
-    <!-- Image tools content here -->
-</div>
+    <!-- Emoji Enhancer -->
+    <div class="tool-card">
+        <h2>Emoji Enhancer</h2>
+        <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
+        <button onclick="addEmojis()">Add Emojis</button>
+        <div class="output" id="emojiOutput"></div>
+    </div>
 
-<!-- Language Selection -->
-<div id="language" class="tab-content">
-    <h2>Select Your Language</h2>
-    <button>English</button>
-    <button>Dansk</button>
-    <button>Español</button>
-    <button>Français</button>
-    <button>Deutsch</button>
-    <button>Arabic</button>
-    <!-- Language selection content here -->
-</div>
-
-<!-- Text Tools -->
-<div id="text" class="tab-content">
-    <h2>Text Tools</h2>
-    <button>Summarize Text</button>
-    <button>Generate Titles</button>
-    <button>Generate Descriptions</button>
-    <!-- Text Tools content here -->
+    <!-- Word Counter -->
+    <div class="tool-card">
+        <h2>Word Counter</h2>
+        <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
+        <button onclick="countWords()">Count Words</button>
+        <div class="output" id="wordOutput"></div>
+    </div>
 </div>
 
 <footer>Free AI tools for content creators</footer>
 
 <script>
-// Tab switching function
-function openTab(tabName) {
-    let tabs = document.querySelectorAll(".tab-content");
-    tabs.forEach(tab => tab.classList.remove("active"));
-    document.getElementById(tabName).classList.add("active");
-}
-
 // Hashtag Generator
 const hashtagDb = {
     fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
@@ -243,4 +163,12 @@ function addEmojis() {
 
 // Word Counter
 function countWords() {
-    const txt = document.getElementBy
+    const txt = document.getElementById("wordText").value.trim();
+    const words = txt ? txt.split(/\s+/).length : 0;
+    const chars = txt.length;
+    document.getElementById("wordOutput").innerText = "Words: " + words + "\nCharacters: " + chars;
+}
+</script>
+
+</body>
+</html>
