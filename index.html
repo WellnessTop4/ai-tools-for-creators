@@ -233,4 +233,28 @@
   function generateHashtags() {
     const topic = document.getElementById("topic").value.toLowerCase();
     const list = hashtagDb[topic] || ["#Content", "#Creator", "#Trending", "#Viral", "#Ideas"];
-    document.getElementById("hashtagOutput").innerText = list.join
+    document.getElementById("hashtagOutput").innerText = list.join(" ");
+  }
+
+  // Emoji Enhancer
+  const emojiMap = {
+    love: "❤️",
+    coffee: "☕",
+    travel: "🌍",
+    happy: "😊",
+    food: "🍔",
+    star: "⭐"
+  };
+
+  function addEmojis() {
+    let txt = document.getElementById("emojiText").value;
+    for (const word in emojiMap) {
+      const re = new RegExp("\\b" + word + "\\b", "gi");
+      txt = txt.replace(re, emojiMap[word] + " " + word);
+    }
+    document.getElementById("emojiOutput").innerText = txt;
+  }
+
+  // Word Counter
+  function countWords() {
+   
