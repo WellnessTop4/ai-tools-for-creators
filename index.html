@@ -1,200 +1,191 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Tools for Creators</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #f0f0f0;
-      margin: 0;
-      padding: 40px 20px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    h1 { color: #bb86fc; }
-    h2 { color: #1565c0; }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .tool-card {
-      background: #1f1f1f;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
-    }
-    .tool-card:hover { transform: translateY(-4px); }
-    input, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border-radius: 6px;
-    }
-    textarea { min-height: 90px; }
-    button {
-      background: #bb86fc;
-      color: #121212;
-      cursor: pointer;
-    }
-    button:hover { background: #985eff; }
-    .output {
-      background: #2c2c2c;
-      padding: 12px;
-      border-radius: 6px;
-      margin-top: 10px;
-    }
-    select {
-      padding: 8px;
-      border-radius: 6px;
-      background-color: #333;
-      color: #f0f0f0;
-      margin-bottom: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools for Creators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #f0f0f0;
+            padding: 20px;
+            margin: 0;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        .tool {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #1f1f1f;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #BB86FC;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #985eff;
+        }
+        textarea, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #444;
+            background: #333;
+            color: #fff;
+        }
+        .output {
+            background: #2c2c2c;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>AI Tools for Creators</h1>
+        
+        <!-- File Upload -->
+        <div class="tool">
+            <h2>File Upload</h2>
+            <input type="file" id="fileInput">
+            <button onclick="uploadFile()">Upload File</button>
+            <div class="output" id="fileOutput"></div>
+        </div>
 
-<header>
-  <h1>AI Tools for Creators</h1>
-  <div>Gratis værktøjer til captions, hashtags, prompts og mere</div>
-  <!-- Sprogvalg -->
-  <select id="languageSelect" onchange="changeLanguage()">
-    <option value="da">Dansk</option>
-    <option value="en">English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="de">Deutsch</option>
-    <option value="ar">العربية</option>
-  </select>
-</header>
+        <!-- Hashtag Generator -->
+        <div class="tool">
+            <h2>Hashtag Generator</h2>
+            <input type="text" id="hashtagInput" placeholder="Enter a topic (e.g., fitness)">
+            <button onclick="generateHashtags()">Generate Hashtags</button>
+            <div class="output" id="hashtagOutput"></div>
+        </div>
 
-<div class="container">
-  <!-- Hashtag Generator -->
-  <div class="tool-card">
-    <h2 id="hashtagHeader">Hashtag Generator</h2>
-    <input id="topic" placeholder="Skriv emne (f.eks. fitness)">
-    <button onclick="generateHashtags()">Generate Hashtags</button>
-    <div class="output" id="hashtagOutput"></div>
-  </div>
+        <!-- Text Generator -->
+        <div class="tool">
+            <h2>Text Generator</h2>
+            <textarea id="textInput" placeholder="Write some text..."></textarea>
+            <button onclick="generateText()">Generate Text</button>
+            <div class="output" id="textOutput"></div>
+        </div>
 
-  <!-- Clickbait Title Generator -->
-  <div class="tool-card">
-    <h2 id="clickbaitHeader">Clickbait Title Generator</h2>
-    <input id="clickbaitTopic" placeholder="Skriv emne (f.eks. AI)">
-    <button onclick="generateTitle()">Generate Title</button>
-    <div class="output" id="titleOutput"></div>
-  </div>
+        <!-- Language Switcher -->
+        <div class="tool">
+            <h2>Language Switcher</h2>
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="da">Danish</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="ar">Arabic</option>
+            </select>
+            <div class="output" id="languageOutput"></div>
+        </div>
+    </div>
 
-  <!-- Emoji Enhancer -->
-  <div class="tool-card">
-    <h2 id="emojiHeader">Emoji Enhancer</h2>
-    <textarea id="emojiText" placeholder="Skriv tekst..."></textarea>
-    <button onclick="addEmojis()">Add Emojis</button>
-    <div class="output" id="emojiOutput"></div>
-  </div>
+    <script>
+        let selectedLang = "en";  // Default language is English
+        
+        // File Upload Handler
+        function uploadFile() {
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+            const outputDiv = document.getElementById("fileOutput");
+            if (file) {
+                outputDiv.innerHTML = getTranslation("fileInfo").replace("{filename}", file.name).replace("{filesize}", file.size);
+            } else {
+                outputDiv.innerHTML = getTranslation("noFileSelected");
+            }
+        }
 
-  <!-- Word Counter -->
-  <div class="tool-card">
-    <h2 id="wordCounterHeader">Word Counter</h2>
-    <textarea id="wordText" placeholder="Skriv tekst..."></textarea>
-    <button onclick="countWords()">Count Words</button>
-    <div class="output" id="wordOutput"></div>
-  </div>
+        // Hashtag Generator Handler
+        const hashtagDb = {
+            fitness: {
+                en: ["#Fitness", "#Workout", "#Health", "#FitLife"],
+                da: ["#Fitness", "#Træning", "#Sundhed", "#FitLiv"],
+                es: ["#Aptitud", "#Entrenamiento", "#Salud", "#VidaFit"],
+                fr: ["#Forme", "#Entraînement", "#Santé", "#VieFit"],
+                de: ["#Fitness", "#Workout", "#Gesundheit", "#FitLeben"],
+                ar: ["#لياقة", "#تمرين", "#صحة", "#حياة_مناسبة"]
+            },
+            food: {
+                en: ["#Foodie", "#Delicious", "#Yummy", "#Food"],
+                da: ["#Madelsker", "#Lækker", "#Smagfuld", "#Mad"],
+                es: ["#Comida", "#Deliciosa", "#Sabrosa", "#Comida"],
+                fr: ["#Gourmand", "#Délicieux", "#Savoureux", "#Nourriture"],
+                de: ["#Essen", "#Lecker", "#Köstlich", "#Nahrung"],
+                ar: ["#طعام", "#لذيذ", "#شهي", "#طعام"]
+            }
+        };
 
-  <!-- Prompt Generator -->
-  <div class="tool-card">
-    <h2 id="promptHeader">Prompt Generator</h2>
-    <button onclick="generatePrompt()">Generate Prompt</button>
-    <div class="output" id="promptOutput"></div>
-  </div>
+        function generateHashtags() {
+            const topic = document.getElementById("hashtagInput").value.toLowerCase();
+            const hashtags = hashtagDb[topic] ? hashtagDb[topic][selectedLang] : ["#Creative", "#Content", "#Trending"];
+            document.getElementById("hashtagOutput").innerText = hashtags.join(" ");
+        }
 
-  <!-- File Upload -->
-  <div class="tool-card">
-    <h2 id="fileUploadHeader">Upload Image or Audio</h2>
-    <input type="file" id="fileInput">
-    <button onclick="uploadFile()">Upload File</button>
-    <div class="output" id="fileOutput"></div>
-  </div>
-</div>
+        // Text Generator Handler
+        function generateText() {
+            const inputText = document.getElementById("textInput").value;
+            document.getElementById("textOutput").innerText = inputText.toUpperCase();
+        }
 
-<script>
-// Sprogdata
-const langData = {
-  da: {
-    hashtagHeader: "Hashtag Generator",
-    clickbaitHeader: "Clickbait Title Generator",
-    emojiHeader: "Emoji Enhancer",
-    wordCounterHeader: "Word Counter",
-    promptHeader: "Prompt Generator",
-    fileUploadHeader: "Upload Image or Audio",
-  },
-  en: {
-    hashtagHeader: "Hashtag Generator",
-    clickbaitHeader: "Clickbait Title Generator",
-    emojiHeader: "Emoji Enhancer",
-    wordCounterHeader: "Word Counter",
-    promptHeader: "Prompt Generator",
-    fileUploadHeader: "Upload Image or Audio",
-  },
-  // Add more language options here if needed.
-};
+        // Language Switcher
+        function changeLanguage() {
+            selectedLang = document.getElementById("languageSelect").value;
+            const languageOutput = document.getElementById("languageOutput");
 
-let currentLang = "da"; // Default language is Danish
+            if (selectedLang === "en") {
+                languageOutput.innerText = "You have selected English.";
+            } else if (selectedLang === "da") {
+                languageOutput.innerText = "Du har valgt Dansk.";
+            } else if (selectedLang === "es") {
+                languageOutput.innerText = "Has seleccionado Español.";
+            } else if (selectedLang === "fr") {
+                languageOutput.innerText = "Vous avez sélectionné Français.";
+            } else if (selectedLang === "de") {
+                languageOutput.innerText = "Du hast Deutsch gewählt.";
+            } else if (selectedLang === "ar") {
+                languageOutput.innerText = "لقد اخترت العربية.";
+            }
+        }
 
-// Change language function
-function changeLanguage() {
-  currentLang = document.getElementById("languageSelect").value;
-  updateLanguage();
-}
+        // Helper function to get translation based on selected language
+        function getTranslation(key) {
+            const translations = {
+                fileInfo: {
+                    en: "File Name: {filename}<br>File Size: {filesize} bytes",
+                    da: "Filnavn: {filename}<br>Filstørrelse: {filesize} bytes",
+                    es: "Nombre del archivo: {filename}<br>Tamaño del archivo: {filesize} bytes",
+                    fr: "Nom du fichier : {filename}<br>Taille du fichier : {filesize} octets",
+                    de: "Dateiname: {filename}<br>Dateigröße: {filesize} Bytes",
+                    ar: "اسم الملف: {filename}<br>حجم الملف: {filesize} بايت"
+                },
+                noFileSelected: {
+                    en: "No file selected.",
+                    da: "Ingen fil valgt.",
+                    es: "No se seleccionó archivo.",
+                    fr: "Aucun fichier sélectionné.",
+                    de: "Keine Datei ausgewählt.",
+                    ar: "لم يتم اختيار ملف."
+                }
+            };
 
-function updateLanguage() {
-  document.getElementById("hashtagHeader").innerText = langData[currentLang].hashtagHeader;
-  document.getElementById("clickbaitHeader").innerText = langData[currentLang].clickbaitHeader;
-  document.getElementById("emojiHeader").innerText = langData[currentLang].emojiHeader;
-  document.getElementById("wordCounterHeader").innerText = langData[currentLang].wordCounterHeader;
-  document.getElementById("promptHeader").innerText = langData[currentLang].promptHeader;
-  document.getElementById("fileUploadHeader").innerText = langData[currentLang].fileUploadHeader;
-}
-
-// Hashtag Generator
-const hashtagDb = {
-  fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
-  travel: ["#Travel", "#Adventure", "#Explore", "#Wanderlust", "#TravelLife"],
-  food: ["#Food", "#Foodie", "#Delicious", "#InstaFood", "#Yummy"],
-};
-function generateHashtags() {
-  const topic = document.getElementById("topic").value.toLowerCase();
-  const list = hashtagDb[topic] || ["#Content", "#Creator", "#Trending", "#Viral"];
-  document.getElementById("hashtagOutput").innerText = list.join(" ");
-}
-
-// Clickbait Title Generator
-const titles = [
-  "Du vil ikke tro hvad der skete med {topic}",
-  "5 hemmeligheder om {topic} som ingen fortæller",
-  "Hvordan {topic} ændrede alt",
-  "Sandheden om {topic}",
-  "Top tricks creators bruger til {topic}",
-];
-function generateTitle() {
-  const topic = document.getElementById("clickbaitTopic").value || "dette emne";
-  const template = titles[Math.floor(Math.random() * titles.length)];
-  document.getElementById("titleOutput").innerText = template.replace("{topic}", topic);
-}
-
-// Emoji Enhancer
-const emojiMap = { love: "❤️", coffee: "☕", travel: "🌍", happy: "😊", food: "🍔" };
-function addEmojis() {
-  let txt = document.getElementById("emojiText").value;
-  for (const word in emojiMap) {
-    const re = new RegExp("\\b" + word + "\\b", "gi");
-    txt = txt.replace(re, emojiMap[word] + " " + word);
-  }
-  document.getElementById("emojiOutput").innerText = txt;
+            return translations[key][selectedLang];
+        }
+    </script>
+</body>
+</html>
