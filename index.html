@@ -174,7 +174,7 @@
 <footer>Free AI tools for content creators</footer>
 
 <script>
-  /* --- Language Handling --- */
+  // Language handling
   const languageData = {
     da: {
       hashtagTitle: "Hashtag Generator",
@@ -202,7 +202,7 @@
     document.getElementById("promptTitle").textContent = languageData[selectedLang].promptTitle;
   }
 
-  /* --- Hashtag Generator --- */
+  // Hashtag Generator
   const hashtagDb = {
     fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
     travel: ["#Travel", "#Adventure", "#Explore", "#Wanderlust", "#TravelLife"],
@@ -216,7 +216,7 @@
     document.getElementById("hashtagOutput").innerText = list.join(" ");
   }
 
-  /* --- Emoji Enhancer --- */
+  // Emoji Enhancer
   const emojiMap = {
     love: "❤️",
     coffee: "☕",
@@ -235,7 +235,7 @@
     document.getElementById("emojiOutput").innerText = txt;
   }
 
-  /* --- Word Counter --- */
+  // Word Counter
   function countWords() {
     const txt = document.getElementById("wordText").value.trim();
     const words = txt ? txt.split(/\s+/).length : 0;
@@ -243,11 +243,6 @@
     document.getElementById("wordOutput").innerText = "Words: " + words + "\nCharacters: " + chars;
   }
 
-  /* --- Prompt Generator --- */
+  // Prompt Generator
   const subjects = ["AI", "Fitness", "Marketing", "Travel", "Food"];
-  const actions = ["ideas", "tips", "strategies", "guides"];
-  const formats = ["for TikTok", "for Instagram", "for YouTube", "for blogs"];
-
-  function generatePrompt() {
-    const s = subjects[Math.floor(Math.random() * subjects.length)];
-    const a =
+  const actions = ["ideas", "tips",
