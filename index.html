@@ -1,258 +1,213 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Tools for Creators</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #f0f0f0;
-      margin: 0;
-      padding: 40px 20px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    h1 {
-      color: #bb86fc;
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      color: #aaa;
-      font-size: 14px;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .tool-card {
-      background: #1f1f1f;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-      transition: 0.2s;
-    }
-
-    .tool-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #bb86fc;
-      font-size: 18px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border: 1px solid #444;
-      border-radius: 6px;
-      font-size: 14px;
-      background: #333;
-      color: #f0f0f0;
-      box-sizing: border-box;
-    }
-
-    textarea {
-      min-height: 90px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      background: #bb86fc;
-      color: #121212;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #985eff;
-    }
-
-    .output {
-      margin-top: 12px;
-      background: #2c2c2c;
-      border: 1px solid #444;
-      padding: 12px;
-      border-radius: 6px;
-      white-space: pre-wrap;
-      font-size: 14px;
-      color: #f0f0f0;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    @media (max-width: 700px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools for Creators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            margin: 0;
+            padding: 40px 20px;
+            color: #f0f0f0;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 { color: #bb86fc; margin-bottom: 5px; }
+        .subtitle { color: #aaa; font-size: 14px; }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .tool-card {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+            transition: 0.2s;
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+        }
+        h2 { margin-top:0; color:#bb86fc; font-size:18px; }
+        input, textarea {
+            width:100%;
+            padding:10px;
+            margin-top:8px;
+            border:1px solid #444;
+            border-radius:6px;
+            font-size:14px;
+            background:#333;
+            color:#f0f0f0;
+            box-sizing:border-box;
+        }
+        textarea{ min-height:90px; }
+        button {
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+            background:#bb86fc;
+            color:#121212;
+            border:none;
+            border-radius:6px;
+            font-size:14px;
+            cursor:pointer;
+        }
+        button:hover{ background:#985eff; }
+        .output {
+            margin-top:12px;
+            background:#2c2c2c;
+            border:1px solid #444;
+            padding:12px;
+            border-radius:6px;
+            white-space:pre-wrap;
+            font-size:14px;
+            color:#f0f0f0;
+        }
+        footer {
+            text-align:center;
+            margin-top:40px;
+            font-size:13px;
+            color:#aaa;
+        }
+        @media(max-width:700px){ .container{ grid-template-columns:1fr; } }
+    </style>
 </head>
 <body>
 
 <header>
-  <h1>AI Tools for Creators</h1>
-  <div class="subtitle">Gratis værktøjer til captions, hashtags, filupload og tekstmanipulation</div>
+    <h1>AI Tools for Creators</h1>
+    <div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og meget mere</div>
 </header>
 
-<!-- Sprogvalg -->
-<div>
-  <label for="language">Vælg sprog:</label>
-  <select id="language" onchange="changeLanguage()">
-    <option value="da">Dansk</option>
-    <option value="en">English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="de">Deutsch</option>
-  </select>
-</div>
-
 <div class="container">
-  <!-- Hashtag Generator -->
-  <div class="tool-card">
-    <h2 id="hashtagTitle">Hashtag Generator</h2>
-    <input id="topic" placeholder="Skriv emne fx 'fitness'">
-    <button onclick="generateHashtags()">Generate Hashtags</button>
-    <div class="output" id="hashtagOutput"></div>
-  </div>
 
-  <!-- File Upload -->
-  <div class="tool-card">
-    <h2 id="fileUploadTitle">File Upload</h2>
-    <input type="file" id="fileInput" onchange="handleFileUpload(event)">
-    <div class="output" id="fileOutput"></div>
-  </div>
+    <!-- Hashtag Generator -->
+    <div class="tool-card">
+        <h2>Hashtag Generator</h2>
+        <input id="topic" placeholder="Skriv emne fx 'fitness'">
+        <button onclick="generateHashtags()">Generate Hashtags</button>
+        <div class="output" id="hashtagOutput"></div>
+    </div>
 
-  <!-- Emoji Enhancer -->
-  <div class="tool-card">
-    <h2 id="emojiTitle">Emoji Enhancer</h2>
-    <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
-    <button onclick="addEmojis()">Add Emojis</button>
-    <div class="output" id="emojiOutput"></div>
-  </div>
+    <!-- Clickbait Title Generator -->
+    <div class="tool-card">
+        <h2>Clickbait Title Generator</h2>
+        <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
+        <button onclick="generateTitle()">Generate Title</button>
+        <div class="output" id="titleOutput"></div>
+    </div>
 
-  <!-- Word Counter -->
-  <div class="tool-card">
-    <h2 id="wordCountTitle">Word Counter</h2>
-    <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
-    <button onclick="countWords()">Count Words</button>
-    <div class="output" id="wordOutput"></div>
-  </div>
+    <!-- Emoji Enhancer -->
+    <div class="tool-card">
+        <h2>Emoji Enhancer</h2>
+        <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
+        <button onclick="addEmojis()">Add Emojis</button>
+        <div class="output" id="emojiOutput"></div>
+    </div>
 
-  <!-- Prompt Generator -->
-  <div class="tool-card">
-    <h2 id="promptTitle">Prompt Generator</h2>
-    <button onclick="generatePrompt()">Generate Prompt</button>
-    <div class="output" id="promptOutput"></div>
-  </div>
+    <!-- Word Counter -->
+    <div class="tool-card">
+        <h2>Word Counter</h2>
+        <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
+        <button onclick="countWords()">Count Words</button>
+        <div class="output" id="wordOutput"></div>
+    </div>
+
+    <!-- Prompt Generator -->
+    <div class="tool-card">
+        <h2>Prompt Generator</h2>
+        <button onclick="generatePrompt()">Generate Prompt</button>
+        <div class="output" id="promptOutput"></div>
+    </div>
+
+    <!-- File Upload -->
+    <div class="tool-card">
+        <h2>File Upload</h2>
+        <input type="file" id="fileInput">
+        <button onclick="uploadFile()">Upload File</button>
+        <div class="output" id="fileOutput"></div>
+    </div>
+
 </div>
 
 <footer>Free AI tools for content creators</footer>
 
 <script>
-  // Language handling
-  const languageData = {
-    da: {
-      hashtagTitle: "Hashtag Generator",
-      fileUploadTitle: "File Upload",
-      emojiTitle: "Emoji Enhancer",
-      wordCountTitle: "Word Counter",
-      promptTitle: "Prompt Generator",
-    },
-    en: {
-      hashtagTitle: "Hashtag Generator",
-      fileUploadTitle: "File Upload",
-      emojiTitle: "Emoji Enhancer",
-      wordCountTitle: "Word Counter",
-      promptTitle: "Prompt Generator",
-    },
-    es: {
-      hashtagTitle: "Generador de Hashtags",
-      fileUploadTitle: "Subida de Archivos",
-      emojiTitle: "Mejorador de Emojis",
-      wordCountTitle: "Contador de Palabras",
-      promptTitle: "Generador de Prompts",
-    },
-    fr: {
-      hashtagTitle: "Générateur de Hashtags",
-      fileUploadTitle: "Téléchargement de fichiers",
-      emojiTitle: "Améliorateur d'Emojis",
-      wordCountTitle: "Compteur de mots",
-      promptTitle: "Générateur de Prompts",
-    },
-    de: {
-      hashtagTitle: "Hashtag Generator",
-      fileUploadTitle: "Dateiupload",
-      emojiTitle: "Emoji-Verbesserer",
-      wordCountTitle: "Wörterzähler",
-      promptTitle: "Prompt-Generator",
-    },
-  };
-
-  function changeLanguage() {
-    const selectedLang = document.getElementById("language").value;
-    document.getElementById("hashtagTitle").textContent = languageData[selectedLang].hashtagTitle;
-    document.getElementById("fileUploadTitle").textContent = languageData[selectedLang].fileUploadTitle;
-    document.getElementById("emojiTitle").textContent = languageData[selectedLang].emojiTitle;
-    document.getElementById("wordCountTitle").textContent = languageData[selectedLang].wordCountTitle;
-    document.getElementById("promptTitle").textContent = languageData[selectedLang].promptTitle;
-  }
-
-  // Hashtag Generator
-  const hashtagDb = {
+// HASHTAGS
+const hashtagDb = {
     fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
     travel: ["#Travel", "#Adventure", "#Explore", "#Wanderlust", "#TravelLife"],
     food: ["#Food", "#Foodie", "#Delicious", "#InstaFood", "#Yummy"],
     tech: ["#Tech", "#AI", "#Innovation", "#Future", "#Startup"]
-  };
-
-  function generateHashtags() {
+};
+function generateHashtags() {
     const topic = document.getElementById("topic").value.toLowerCase();
     const list = hashtagDb[topic] || ["#Content", "#Creator", "#Trending", "#Viral", "#Ideas"];
     document.getElementById("hashtagOutput").innerText = list.join(" ");
-  }
+}
 
-  // Emoji Enhancer
-  const emojiMap = {
-    love: "❤️",
-    coffee: "☕",
-    travel: "🌍",
-    happy: "😊",
-    food: "🍔",
-    star: "⭐"
-  };
+// CLICKBAIT
+const titles = [
+    "Du vil ikke tro hvad der skete med {topic}",
+    "5 hemmeligheder om {topic} som ingen fortæller",
+    "Hvordan {topic} ændrede alt",
+    "Sandheden om {topic}",
+    "Top tricks creators bruger til {topic}"
+];
+function generateTitle() {
+    const topic = document.getElementById("clickbaitTopic").value || "dette emne";
+    const template = titles[Math.floor(Math.random() * titles.length)];
+    document.getElementById("titleOutput").innerText = template.replace("{topic}", topic);
+}
 
-  function addEmojis() {
+// EMOJIS
+const emojiMap = { love: "❤️", coffee: "☕", travel: "🌍", happy: "😊", food: "🍔", star: "⭐" };
+function addEmojis() {
     let txt = document.getElementById("emojiText").value;
     for (const word in emojiMap) {
-      const re = new RegExp("\\b" + word + "\\b", "gi");
-      txt = txt.replace(re, emojiMap[word] + " " + word);
+        const re = new RegExp("\\b" + word + "\\b", "gi");
+        txt = txt.replace(re, emojiMap[word] + " " + word);
     }
     document.getElementById("emojiOutput").innerText = txt;
-  }
+}
 
-  //
+// WORD COUNTER
+function countWords() {
+    const txt = document.getElementById("wordText").value.trim();
+    const words = txt ? txt.split(/\s+/).length : 0;
+    const chars = txt.length;
+    document.getElementById("wordOutput").innerText = "Words: " + words + "\nCharacters: " + chars;
+}
+
+// PROMPT GENERATOR
+const subjects = ["AI", "Fitness", "Marketing", "Travel", "Food"];
+const actions = ["ideas", "tips", "strategies", "guides"];
+const formats = ["for TikTok", "for Instagram", "for YouTube", "for blogs"];
+function generatePrompt() {
+    const s = subjects[Math.floor(Math.random() * subjects.length)];
+    const a = actions[Math.floor(Math.random() * actions.length)];
+    const f = formats[Math.floor(Math.random() * formats.length)];
+    document.getElementById("promptOutput").innerText = "Create " + a + " about " + s + " " + f;
+}
+
+// FILE UPLOAD
+function uploadFile() {
+    const file = document.getElementById("fileInput").files[0];
+    if (file) {
+        document.getElementById("fileOutput").innerText = "File uploaded: " + file.name;
+    } else {
+        document.getElementById("fileOutput").innerText = "No file selected.";
+    }
+}
+</script>
+
+</body>
+</html>
