@@ -84,6 +84,18 @@
 <header>
   <h1>AI Tools for Creators</h1>
   <div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og meget mere</div>
+  <div>
+    <label for="languageSelect">Vælg sprog:</label>
+    <select id="languageSelect" onchange="changeLanguage()">
+      <option value="da">Dansk</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="ar">العربية</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
 </header>
 
 <div class="container">
@@ -143,16 +155,23 @@
 <footer>Free AI tools for content creators</footer>
 
 <script>
+// Change language dynamically
+function changeLanguage() {
+  const selectedLanguage = document.getElementById('languageSelect').value;
+  // Logic for changing the language dynamically
+  alert("Language changed to: " + selectedLanguage);
+}
+
 /* HASHTAGS */
-const hashtagDb={
-  fitness: ["#Fitness","#Gym","#Workout","#Health","#FitLife"],
-  travel: ["#Travel","#Adventure","#Explore","#Wanderlust","#TravelLife"],
-  food: ["#Food","#Foodie","#Delicious","#InstaFood","#Yummy"],
-  tech: ["#Tech","#AI","#Innovation","#Future","#Startup"]
+const hashtagDb = {
+  fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
+  travel: ["#Travel", "#Adventure", "#Explore", "#Wanderlust", "#TravelLife"],
+  food: ["#Food", "#Foodie", "#Delicious", "#InstaFood", "#Yummy"],
+  tech: ["#Tech", "#AI", "#Innovation", "#Future", "#Startup"]
 };
-function generateHashtags(){
+function generateHashtags() {
   const topic = document.getElementById("topic").value.toLowerCase();
-  const list = hashtagDb[topic] || ["#Content","#Creator","#Trending","#Viral","#Ideas"];
+  const list = hashtagDb[topic] || ["#Content", "#Creator", "#Trending", "#Viral", "#Ideas"];
   document.getElementById("hashtagOutput").innerText = list.join(" ");
 }
 
@@ -186,42 +205,4 @@ function countWords() {
   const txt = document.getElementById("wordText").value.trim();
   const words = txt ? txt.split(/\s+/).length : 0;
   const chars = txt.length;
-  document.getElementById("wordOutput").innerText = "Words: " + words + "\nCharacters: " + chars;
-}
-
-/* PROMPT GENERATOR */
-const subjects = ["AI", "Fitness", "Marketing", "Travel", "Food"];
-const actions = ["ideas", "tips", "strategies", "guides"];
-const formats = ["for TikTok", "for Instagram", "for YouTube", "for blogs"];
-function generatePrompt() {
-  const s = subjects[Math.floor(Math.random() * subjects.length)];
-  const a = actions[Math.floor(Math.random() * actions.length)];
-  const f = formats[Math.floor(Math.random() * formats.length)];
-  document.getElementById("promptOutput").innerText = "Create " + a + " about " + s + " " + f;
-}
-
-/* AUDIO CONVERTER */
-function convertAudio() {
-  const file = document.getElementById("audioFile").files[0];
-  if (!file) {
-    document.getElementById("audioOutput").innerText = "Please select a file.";
-    return;
-  }
-  document.getElementById("audioOutput").innerText = "Converting: " + file.name;
-  // Dummy output, should integrate conversion logic here
-  setTimeout(() => {
-    document.getElementById("audioOutput").innerText = "Audio converted!";
-  }, 2000);
-}
-
-/* IMAGE CONVERTER */
-function convertImage() {
-  const file = document.getElementById("imageFile").files[0];
-  if (!file) {
-    document.getElementById("imageOutput").innerText = "Please select an image file.";
-    return;
-  }
-  document.getElementById("imageOutput").innerText = "Converting: " + file.name;
-  // Dummy output, should integrate conversion logic here
-  setTimeout(() => {
-    document
+  document.getElementById("wordOutput
