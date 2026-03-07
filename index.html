@@ -190,7 +190,27 @@
       wordCountTitle: "Word Counter",
       promptTitle: "Prompt Generator",
     },
-    // Add more languages here...
+    es: {
+      hashtagTitle: "Generador de Hashtags",
+      fileUploadTitle: "Subida de Archivos",
+      emojiTitle: "Mejorador de Emojis",
+      wordCountTitle: "Contador de Palabras",
+      promptTitle: "Generador de Prompts",
+    },
+    fr: {
+      hashtagTitle: "Générateur de Hashtags",
+      fileUploadTitle: "Téléchargement de fichiers",
+      emojiTitle: "Améliorateur d'Emojis",
+      wordCountTitle: "Compteur de mots",
+      promptTitle: "Générateur de Prompts",
+    },
+    de: {
+      hashtagTitle: "Hashtag Generator",
+      fileUploadTitle: "Dateiupload",
+      emojiTitle: "Emoji-Verbesserer",
+      wordCountTitle: "Wörterzähler",
+      promptTitle: "Prompt-Generator",
+    },
   };
 
   function changeLanguage() {
@@ -213,35 +233,4 @@
   function generateHashtags() {
     const topic = document.getElementById("topic").value.toLowerCase();
     const list = hashtagDb[topic] || ["#Content", "#Creator", "#Trending", "#Viral", "#Ideas"];
-    document.getElementById("hashtagOutput").innerText = list.join(" ");
-  }
-
-  // Emoji Enhancer
-  const emojiMap = {
-    love: "❤️",
-    coffee: "☕",
-    travel: "🌍",
-    happy: "😊",
-    food: "🍔",
-    star: "⭐"
-  };
-
-  function addEmojis() {
-    let txt = document.getElementById("emojiText").value;
-    for (const word in emojiMap) {
-      const re = new RegExp("\\b" + word + "\\b", "gi");
-      txt = txt.replace(re, emojiMap[word] + " " + word);
-    }
-    document.getElementById("emojiOutput").innerText = txt;
-  }
-
-  // Word Counter
-  function countWords() {
-    const txt = document.getElementById("wordText").value.trim();
-    const words = txt ? txt.split(/\s+/).length : 0;
-    const chars = txt.length;
-    document.getElementById("wordOutput").innerText = "Words: " + words + "\nCharacters: " + chars;
-  }
-
-  // Prompt Generator
-  const subjects = ["AI", "Fitness", "Marketing", "Travel
+    document.getElementById("hashtagOutput").innerText = list.join
