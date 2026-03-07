@@ -83,7 +83,7 @@
 
 <header>
   <h1>AI Tools for Creators</h1>
-  <div class="subtitle">Gratis værktøjer til captions, hashtags, prompts og meget mere</div>
+  <div class="subtitle" id="subtitle">Gratis værktøjer til captions, hashtags, prompts og meget mere</div>
   <div>
     <label for="languageSelect">Vælg sprog:</label>
     <select id="languageSelect" onchange="changeLanguage()">
@@ -102,52 +102,51 @@
 
   <!-- Hashtag Generator -->
   <div class="tool-card">
-    <h2>Hashtag Generator</h2>
+    <h2 id="hashtagTitle">Hashtag Generator</h2>
     <input id="topic" placeholder="Skriv emne fx 'fitness'">
-    <button onclick="generateHashtags()">Generate Hashtags</button>
+    <button onclick="generateHashtags()">
+      <span id="hashtagBtnText">Generate Hashtags</span>
+    </button>
     <div class="output" id="hashtagOutput"></div>
   </div>
 
   <!-- Clickbait Title Generator -->
   <div class="tool-card">
-    <h2>Clickbait Title Generator</h2>
+    <h2 id="titleGeneratorTitle">Clickbait Title Generator</h2>
     <input id="clickbaitTopic" placeholder="Skriv emne fx 'AI'">
-    <button onclick="generateTitle()">Generate Title</button>
+    <button onclick="generateTitle()">
+      <span id="titleBtnText">Generate Title</span>
+    </button>
     <div class="output" id="titleOutput"></div>
   </div>
 
   <!-- Emoji Enhancer -->
   <div class="tool-card">
-    <h2>Emoji Enhancer</h2>
+    <h2 id="emojiTitle">Emoji Enhancer</h2>
     <textarea id="emojiText" placeholder="Skriv tekst…"></textarea>
-    <button onclick="addEmojis()">Add Emojis</button>
+    <button onclick="addEmojis()">
+      <span id="emojiBtnText">Add Emojis</span>
+    </button>
     <div class="output" id="emojiOutput"></div>
   </div>
 
   <!-- Word Counter -->
   <div class="tool-card">
-    <h2>Word Counter</h2>
+    <h2 id="wordCounterTitle">Word Counter</h2>
     <textarea id="wordText" placeholder="Skriv tekst…"></textarea>
-    <button onclick="countWords()">Count Words</button>
+    <button onclick="countWords()">
+      <span id="wordBtnText">Count Words</span>
+    </button>
     <div class="output" id="wordOutput"></div>
   </div>
 
   <!-- Prompt Generator -->
   <div class="tool-card">
-    <h2>Prompt Generator</h2>
-    <button onclick="generatePrompt()">Generate Prompt</button>
+    <h2 id="promptTitle">Prompt Generator</h2>
+    <button onclick="generatePrompt()">
+      <span id="promptBtnText">Generate Prompt</span>
+    </button>
     <div class="output" id="promptOutput"></div>
-  </div>
-
-  <!-- Audio/Image Converter -->
-  <div class="tool-card">
-    <h2>Audio & Image Converter</h2>
-    <input type="file" id="audioFile" accept=".mp3, .wav, .flac, .mp4">
-    <button onclick="convertAudio()">Convert Audio</button>
-    <div class="output" id="audioOutput"></div>
-    <input type="file" id="imageFile" accept="image/*">
-    <button onclick="convertImage()">Convert Image</button>
-    <div class="output" id="imageOutput"></div>
   </div>
 
 </div>
@@ -158,51 +157,53 @@
 // Change language dynamically
 function changeLanguage() {
   const selectedLanguage = document.getElementById('languageSelect').value;
-  // Logic for changing the language dynamically
-  alert("Language changed to: " + selectedLanguage);
-}
 
-/* HASHTAGS */
-const hashtagDb = {
-  fitness: ["#Fitness", "#Gym", "#Workout", "#Health", "#FitLife"],
-  travel: ["#Travel", "#Adventure", "#Explore", "#Wanderlust", "#TravelLife"],
-  food: ["#Food", "#Foodie", "#Delicious", "#InstaFood", "#Yummy"],
-  tech: ["#Tech", "#AI", "#Innovation", "#Future", "#Startup"]
-};
-function generateHashtags() {
-  const topic = document.getElementById("topic").value.toLowerCase();
-  const list = hashtagDb[topic] || ["#Content", "#Creator", "#Trending", "#Viral", "#Ideas"];
-  document.getElementById("hashtagOutput").innerText = list.join(" ");
-}
-
-/* CLICKBAIT */
-const titles = [
-  "Du vil ikke tro hvad der skete med {topic}",
-  "5 hemmeligheder om {topic} som ingen fortæller",
-  "Hvordan {topic} ændrede alt",
-  "Sandheden om {topic}",
-  "Top tricks creators bruger til {topic}"
-];
-function generateTitle() {
-  const topic = document.getElementById("clickbaitTopic").value || "dette emne";
-  const template = titles[Math.floor(Math.random() * titles.length)];
-  document.getElementById("titleOutput").innerText = template.replace("{topic}", topic);
-}
-
-/* EMOJIS */
-const emojiMap = { love: "❤️", coffee: "☕", travel: "🌍", happy: "😊", food: "🍔", star: "⭐" };
-function addEmojis() {
-  let txt = document.getElementById("emojiText").value;
-  for (const word in emojiMap) {
-    const re = new RegExp("\\b" + word + "\\b", "gi");
-    txt = txt.replace(re, emojiMap[word] + " " + word);
-  }
-  document.getElementById("emojiOutput").innerText = txt;
-}
-
-/* WORD COUNTER */
-function countWords() {
-  const txt = document.getElementById("wordText").value.trim();
-  const words = txt ? txt.split(/\s+/).length : 0;
-  const chars = txt.length;
-  document.getElementById("wordOutput
+  const translations = {
+    da: {
+      subtitle: 'Gratis værktøjer til captions, hashtags, prompts og meget mere',
+      hashtagTitle: 'Hashtag Generator',
+      titleGeneratorTitle: 'Clickbait Title Generator',
+      emojiTitle: 'Emoji Enhancer',
+      wordCounterTitle: 'Word Counter',
+      promptTitle: 'Prompt Generator',
+      hashtagBtnText: 'Generate Hashtags',
+      titleBtnText: 'Generate Title',
+      emojiBtnText: 'Add Emojis',
+      wordBtnText: 'Count Words',
+      promptBtnText: 'Generate Prompt'
+    },
+    en: {
+      subtitle: 'Free tools for captions, hashtags, prompts, and more',
+      hashtagTitle: 'Hashtag Generator',
+      titleGeneratorTitle: 'Clickbait Title Generator',
+      emojiTitle: 'Emoji Enhancer',
+      wordCounterTitle: 'Word Counter',
+      promptTitle: 'Prompt Generator',
+      hashtagBtnText: 'Generate Hashtags',
+      titleBtnText: 'Generate Title',
+      emojiBtnText: 'Add Emojis',
+      wordBtnText: 'Count Words',
+      promptBtnText: 'Generate Prompt'
+    },
+    es: {
+      subtitle: 'Herramientas gratuitas para subtítulos, hashtags, prompts y más',
+      hashtagTitle: 'Generador de Hashtags',
+      titleGeneratorTitle: 'Generador de Títulos Clickbait',
+      emojiTitle: 'Mejorador de Emojis',
+      wordCounterTitle: 'Contador de Palabras',
+      promptTitle: 'Generador de Prompts',
+      hashtagBtnText: 'Generar Hashtags',
+      titleBtnText: 'Generar Título',
+      emojiBtnText: 'Añadir Emojis',
+      wordBtnText: 'Contar Palabras',
+      promptBtnText: 'Generar Prompt'
+    },
+    fr: {
+      subtitle: 'Outils gratuits pour les légendes, les hashtags, les invites et plus encore',
+      hashtagTitle: 'Générateur de Hashtags',
+      titleGeneratorTitle: 'Générateur de Titre Clickbait',
+      emojiTitle: 'Améliorateur d\'Emojis',
+      wordCounterTitle: 'Compteur de Mots',
+      promptTitle: 'Générateur de Prompt',
+      hashtagBtnText: 'Générer des Hashtags',
+      titleBtnText: 'G
